@@ -59,10 +59,13 @@ public:
         }
 
         // RenderItem esferas
-        P_1Render = new RenderItem(sphereShape, &P_1Tr, sphereColors[0]);
-        P_2Render = new RenderItem(sphereShape, &P_2Tr, sphereColors[1]);
-        P_3Render = new RenderItem(sphereShape, &P_3Tr, sphereColors[2]);
-        P_4Render = new RenderItem(sphereShape, &P_4Tr, sphereColors[3]);
+        //P_1Render = new RenderItem(sphereShape, &P_1Tr, sphereColors[0]);
+        //P_2Render = new RenderItem(sphereShape, &P_2Tr, sphereColors[1]);
+        //P_3Render = new RenderItem(sphereShape, &P_3Tr, sphereColors[2]);
+        //P_4Render = new RenderItem(sphereShape, &P_4Tr, sphereColors[3]);
+
+        // RETO C
+
     }
 
     void update(double dt) override {
@@ -85,6 +88,31 @@ public:
         if (wRender) {
             wRender->release(); // Deregistra y destruye el item
             wRender = nullptr;
+        }
+
+        if (uRender) {
+            uRender->release(); // Deregistra y destruye el item
+            uRender = nullptr;
+        }
+
+        if (P_1Render) {
+            P_1Render->release(); // Deregistra y destruye el item
+            P_1Render = nullptr;
+        }
+
+        if (P_2Render) {
+            P_2Render->release(); // Deregistra y destruye el item
+            P_2Render = nullptr;
+        }
+
+        if (P_3Render) {
+            P_3Render->release(); // Deregistra y destruye el item
+            P_3Render = nullptr;
+        }
+
+        if (P_4Render) {
+            P_4Render->release(); // Deregistra y destruye el item
+            P_4Render = nullptr;
         }
     }
 
