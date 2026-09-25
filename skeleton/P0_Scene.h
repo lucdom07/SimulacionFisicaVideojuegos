@@ -65,7 +65,26 @@ public:
         //P_4Render = new RenderItem(sphereShape, &P_4Tr, sphereColors[3]);
 
         // RETO C
+        //Vectores A y B
+        Vector3D a(-8.f, 1.f, -8.f);
+        Vector3D b(8.f, 8.f, 8.f);
 
+        //Transforms
+        aTr = physx::PxTransform(physx::PxVec3(a));
+        bTr = physx::PxTransform(physx::PxVec3(b));
+
+        for (int i = 1; i < 11; i++) {
+            Vector3D v = a + (b - a) * i * 0.1f;
+            interTrans.push_back(physx::PxTransform(physx::PxVec3(v)));
+        }
+
+        //RenderItems
+        aRender = new RenderItem(sphereShape, &aTr, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+        bRender = new RenderItem(sphereShape, &bTr, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+
+        for (physx::PxTransform& trans : interTrans) {
+            interRender.push_back(new RenderItem(sphereShape, &trans, Vector4(1.0f, 0.0f, 0.0f, 1.0f)));
+        }
     }
 
     void update(double dt) override {
@@ -90,11 +109,6 @@ public:
             wRender = nullptr;
         }
 
-        if (uRender) {
-            uRender->release(); // Deregistra y destruye el item
-            uRender = nullptr;
-        }
-
         if (P_1Render) {
             P_1Render->release(); // Deregistra y destruye el item
             P_1Render = nullptr;
@@ -113,6 +127,21 @@ public:
         if (P_4Render) {
             P_4Render->release(); // Deregistra y destruye el item
             P_4Render = nullptr;
+        }
+
+        if (aRender) {
+            aRender->release(); // Deregistra y destruye el item
+            aRender = nullptr;
+        }
+
+        if (bRender) {
+            bRender->release(); // Deregistra y destruye el item
+            bRender = nullptr;
+        }
+
+        for (RenderItem* r : interRender) {
+            r->release(); // Deregistra y destruye el item
+            r = nullptr;
         }
     }
 
@@ -136,5 +165,15 @@ private:
     RenderItem* P_2Render = nullptr;
     RenderItem* P_3Render = nullptr;
     RenderItem* P_4Render = nullptr;
+
+    // RETO C
+    physx::PxTransform aTr;
+    physx::PxTransform bTr;
+    std::vector<physx::PxTransform> interTrans;
+
+    RenderItem* aRender = nullptr;
+    RenderItem* bRender = nullptr;
+    std::vector<RenderItem*> interRender;
+
 };
 
