@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include <vector>
-
+#include <iostream>
 class EmptyScene : public Scene {
 public:
     explicit EmptyScene(std::string name) : Scene(std::move(name)) {}
