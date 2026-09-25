@@ -11,23 +11,58 @@ public:
 
     void init() override {
         // RETO A
-        physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(2.0f));
+        physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(1.0f));
 
         Vector3D u(3.0f, 1.0f, 0.0f);
         Vector3D v(0.0f, 4.0f, 0.0f);
         Vector3D w = u.cross(v);
 
-        //Esfera roja
-        uTr = physx::PxTransform(physx::PxVec3(u.normalize() * 5.0f));
-        uRender = new RenderItem(sphereShape, &uTr, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+        ////Esfera roja
+        //uTr = physx::PxTransform(physx::PxVec3(u.normalize() * 5.0f));
+        //uRender = new RenderItem(sphereShape, &uTr, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 
-        //Esfera verde
-        vTr = physx::PxTransform(physx::PxVec3(v.normalize() * 5.0f));
-        vRender = new RenderItem(sphereShape, &vTr, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+        ////Esfera verde
+        //vTr = physx::PxTransform(physx::PxVec3(v.normalize() * 5.0f));
+        //vRender = new RenderItem(sphereShape, &vTr, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 
-        //Esfera azul
-        wTr = physx::PxTransform(physx::PxVec3(w.normalize() * 5.0f));
-        wRender = new RenderItem(sphereShape, &wTr, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+        ////Esfera azul
+        //wTr = physx::PxTransform(physx::PxVec3(w.normalize() * 5.0f));
+        //wRender = new RenderItem(sphereShape, &wTr, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+
+        // RETO B
+        //Vector enemigo
+        Vector3D d(0.f, 0.f, 1.f);
+        
+        //Vectores esferas
+        std::vector<Vector3D> vSpheres;
+        Vector3D vP_1(2.f, 0.f, 3.f);
+        vSpheres.push_back(vP_1);
+        Vector3D vP_2(-4.f, 0.f, 1.f);
+        vSpheres.push_back(vP_2);
+        Vector3D vP_3(0.f, 0.f, -5.f);
+        vSpheres.push_back(vP_3);
+        Vector3D vP_4(3.f, 0.f, 0.f);
+        vSpheres.push_back(vP_4);
+
+        //Transforms esferas
+        P_1Tr = physx::PxTransform(physx::PxVec3(vP_1));
+        P_2Tr = physx::PxTransform(physx::PxVec3(vP_2));
+        P_3Tr = physx::PxTransform(physx::PxVec3(vP_3));
+        P_4Tr = physx::PxTransform(physx::PxVec3(vP_4));
+
+        // Obtener colores esferas
+        std::vector<Vector4> sphereColors;
+        for (Vector3D& v : vSpheres) {
+            if (d.dot(v) > 0) sphereColors.push_back(Vector4(0.0f, 1.0f, 0.0f, 1.0f)); // verde si está delante
+            else if (d.dot(v) < 0) sphereColors.push_back(Vector4(1.0f, 0.0f, 0.0f, 1.0f)); // rojo si está detrás
+            else sphereColors.push_back(Vector4(1.0f, 1.0f, 0.0f, 1.0f)); // amarillo si está justo en el plano perpendicular
+        }
+
+        // RenderItem esferas
+        P_1Render = new RenderItem(sphereShape, &P_1Tr, sphereColors[0]);
+        P_2Render = new RenderItem(sphereShape, &P_2Tr, sphereColors[1]);
+        P_3Render = new RenderItem(sphereShape, &P_3Tr, sphereColors[2]);
+        P_4Render = new RenderItem(sphereShape, &P_4Tr, sphereColors[3]);
     }
 
     void update(double dt) override {
@@ -54,6 +89,7 @@ public:
     }
 
 private:
+    // RETO A
     physx::PxTransform uTr;
     physx::PxTransform vTr;
     physx::PxTransform wTr;
@@ -61,5 +97,16 @@ private:
     RenderItem* uRender = nullptr;
     RenderItem* vRender = nullptr;
     RenderItem* wRender = nullptr;
+
+    // RETO B
+    physx::PxTransform P_1Tr;
+    physx::PxTransform P_2Tr;
+    physx::PxTransform P_3Tr;
+    physx::PxTransform P_4Tr;
+
+    RenderItem* P_1Render = nullptr;
+    RenderItem* P_2Render = nullptr;
+    RenderItem* P_3Render = nullptr;
+    RenderItem* P_4Render = nullptr;
 };
 
