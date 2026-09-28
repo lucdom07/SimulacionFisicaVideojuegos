@@ -19,7 +19,7 @@ private:
 	float damping;
 
 	physx::PxTransform pose;
-	physx::PxTransform lastPose;
+	Vector3D lastPose;
 	RenderItem* renderItem;
 };
 
