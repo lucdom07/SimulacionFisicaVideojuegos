@@ -133,7 +133,7 @@ void stepPhysics(bool interactive, double t)
 
 		gPhysicsTimeAccumulator -= gFixedTimestep;
 	}
-	SceneManager::instance().update(t);
+	SceneManager::instance().update(gFixedTimestep);
 }
 
 

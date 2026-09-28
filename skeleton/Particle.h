@@ -9,7 +9,9 @@ public:
 	Particle(Vector3D pos, Vector3D pvel, Vector3D a, float d);
 	~Particle();
 
-	void integrate(double t);
+	void integrateEuler(double t);
+	void integrateSemiEuler(double t);
+	void integrateVerlet(double t);
 
 private:
 	Vector3D vel;
@@ -17,6 +19,7 @@ private:
 	float damping;
 
 	physx::PxTransform pose;
+	physx::PxTransform lastPose;
 	RenderItem* renderItem;
 };
 

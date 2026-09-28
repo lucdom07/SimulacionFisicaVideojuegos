@@ -16,7 +16,7 @@ public:
 
     void update(double dt) override {
         // Lógica/Integración del alumno (por ejemplo, movimiento simple)
-        particle.integrate(dt);
+        particle.integrateVerlet(dt);
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
