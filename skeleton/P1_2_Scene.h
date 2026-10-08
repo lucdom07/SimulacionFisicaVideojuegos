@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include <iostream>
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include "Vector3D.h"
