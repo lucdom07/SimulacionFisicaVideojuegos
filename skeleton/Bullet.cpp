@@ -15,5 +15,5 @@ void Bullet::integrateSemiEuler(double t) {
 }
 
 void Bullet::changeGravity(bool increase) {
-	(increase) ? gravity += Vector3D(0, gravMod, 0) : gravity -= Vector3D(0, gravMod, 0);
+	(increase) ? gravity -= Vector3D(0, gravMod, 0) : gravity += Vector3D(0, gravMod, 0);
 }
