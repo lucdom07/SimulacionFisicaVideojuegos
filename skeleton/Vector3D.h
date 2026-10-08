@@ -53,6 +53,13 @@ public:
 		return *this;
 	};
 
+	Vector3D& operator-=(const Vector3D& v) {
+		this->x -= v.x;
+		this->y -= v.y;
+		this->z -= v.z;
+		return *this;
+	};
+
 	explicit operator physx::PxVec3() const {
 		return physx::PxVec3(this->x, this->y, this->z);
 	}
