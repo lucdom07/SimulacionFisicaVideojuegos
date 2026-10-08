@@ -13,13 +13,17 @@ class P1_2_Scene :
 public:
 
     struct BulletConfig {
-        Vector3D vel;
+        float rVel;
+        float simVel;
         float mass;
         float gravity;
     };
 
     explicit P1_2_Scene(std::string name) : Scene(std::move(name)), currP(nullptr) {
-        configs.insert({ bulletChar, BulletConfig{Vector3D(100, 0, 0), 10.f, 9.81f} });
+        configs.insert({ canonChar, BulletConfig{250.f, 2.f, 5000.f, 9.81f} });
+        configs.insert({ tankChar, BulletConfig{1800.f, 20.f, 18000.f, 9.81f} });
+        configs.insert({ gunChar, BulletConfig{330.f, 4.f, 3.56f, 9.81f} });
+        configs.insert({ laserChar, BulletConfig{3.f * powf(10.f, 8.f), 300.f, 0.f, 9.81f}});
     }
 
     void init() override {
@@ -34,8 +38,8 @@ public:
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
-        if (key == bulletChar) {
-            instantiateBullet(key, camera);
+        if (key == canonChar || key == tankChar || key == gunChar || key == laserChar) {
+            instantiateBullet(key);
         }
         else if (currP) {
             if (key == '\'') { 
@@ -63,14 +67,21 @@ public:
         }
     }
 
-    void instantiateBullet(unsigned char key, const physx::PxTransform& camera) {
+    void instantiateBullet(unsigned char key) {
+        Camera* camera = GetCamera();
         BulletConfig chosen = configs[key];
-        currP = new Bullet(Vector3D(camera.p.x, camera.p.y, camera.p.z), chosen.vel, Vector3D(), 0.99f, chosen.mass, chosen.gravity);
+        currP = new Bullet(Vector3D(camera->getEye().x, camera->getEye().y, camera->getEye().z),
+            Vector3D(camera->getDir().x * chosen.simVel, camera->getDir().y * chosen.simVel, camera->getDir().z * chosen.simVel), chosen.rVel,
+            Vector3D(), 0.99f, chosen.mass, chosen.gravity);
         proyectiles.push_back(currP);
     }
 
 private:
-    const char bulletChar = 'p';
+    const char canonChar = 'c';
+    const char tankChar = 't';
+    const char gunChar = 'p';
+    const char laserChar = 'l';
+
     std::unordered_map<unsigned char, BulletConfig> configs;
     std::vector<Bullet*> proyectiles;
     Bullet* currP;

@@ -1,11 +1,10 @@
 #include <iostream>
 #include "Bullet.h"
 
-Bullet::Bullet(Vector3D pos, Vector3D rVel, Vector3D a, float d, float rMass, float rGravity) : 
-	Particle(pos, rVel, a, d, rMass) {
-	vel = rVel * simVelMod;
-	mass = rMass * std::powf((rVel.magnitude() / vel.magnitude()), 2.f);
-	float simGrav = rGravity * std::powf(( vel.magnitude()) / rVel.magnitude(), 2.f);
+Bullet::Bullet(Vector3D pos, Vector3D simvel, float rvel, Vector3D a, float d, float rMass, float rGravity) :
+	Particle(pos, simvel, a, d, rMass) {
+	mass = rMass * std::powf((rvel/simvel.magnitude()), 2.f);
+	float simGrav = rGravity * std::powf(simvel.magnitude() / rvel, 2.f);
 	gravity = Vector3D(0, -simGrav, 0);
 };
 
