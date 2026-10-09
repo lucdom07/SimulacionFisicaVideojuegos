@@ -17,6 +17,9 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="P1_2_Scene.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="P2_Scene.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -37,6 +40,9 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="P1_2_Scene.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="P2_Scene.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
