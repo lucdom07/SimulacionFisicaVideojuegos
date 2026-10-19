@@ -1,10 +1,18 @@
+#include <iostream>
 #include "Particle.h"
 #include "RenderUtils.hpp"
-#include <iostream>
-Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D a, float d, float m) :
-	pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), damping(d), mass(m) {
-	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(1.0f));
-	renderItem = new RenderItem(sphereShape, &pose, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+
+Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vector3D(0,0,0)))), lastPose(Vector3D(0, 0, 0)), 
+	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), invMass(1 / mass), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0) {
+	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.f));
+	renderItem = new RenderItem(sphereShape, &pose, Vector4(0.f, 0.f, 0.f, 1.0f));
+};
+
+Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) :
+	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), 
+	mass(m), invMass(1/m), gravity(Vector3D(0, -g, 0)), lifeTime(life), lTimer(0) {
+	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
+	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
 };
 
 Particle::~Particle() {
@@ -14,6 +22,20 @@ Particle::~Particle() {
 	}
 }
 
+void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) {
+	pose = physx::PxTransform(physx::PxVec3(pos));
+	lastPose = pos;
+	vel = pvel; 
+	acc = a;
+	mass = m; 
+	invMass = 1 / m;
+	gravity = Vector3D(0, -g, 0); 
+	lifeTime = life; 
+	lTimer = 0;
+	renderItem->shape->getGeometry().sphere().radius = size;
+	renderItem->color.w = 1.0f;
+}
+
 void Particle::integrateEuler(double t) {
 	pose.p = pose.p + physx::PxVec3(vel) * t;
 	vel = vel + acc * t;
@@ -21,9 +43,10 @@ void Particle::integrateEuler(double t) {
 }
 
 void Particle::integrateSemiEuler(double t) {
-	vel = vel + acc * t;
-	vel = vel * pow(damping, t); // para que el damping dependa del tiempo
-	pose.p = pose.p + physx::PxVec3(vel) * t;
+	if (!active) return;
+	vel = vel + gravity * mass * t;
+	vel = vel * pow(damping, t);
+	pose.p = pose.p + physx::PxVec3(vel * t + gravity * mass * 0.5f * t * t);
 }
 
 void Particle::integrateVerlet(double t) {
@@ -34,4 +57,24 @@ void Particle::integrateVerlet(double t) {
 
 void Particle::changeMass(bool increase) {
 	(increase) ? mass += massMod : mass -= massMod;
+}
+
+void Particle::changeGravity(bool increase) {
+	(increase) ? gravity -= Vector3D(0, gravMod, 0) : gravity += Vector3D(0, gravMod, 0);
+}
+
+void Particle::countLifeTime(double t) {
+	if (!active) return;
+	lTimer += t;
+	if (lTimer >= lifeTime) active = false;
+}
+
+void Particle::decreaseOpacity(double t) {
+	if (!active) return;
+	renderItem->color.w -= opacMod * (t/lifeTime);
+}
+
+void Particle::decreaseSize(double t) {
+	if (!active) return;
+	renderItem->shape->getGeometry().sphere().radius -= sizeMod * (t / lifeTime);
 }

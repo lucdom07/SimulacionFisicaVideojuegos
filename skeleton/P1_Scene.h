@@ -8,7 +8,7 @@ class P1_Scene :
 {
 public:
     explicit P1_Scene(std::string name) : Scene(std::move(name)), 
-        particle(Vector3D(0,0,0), Vector3D(10, 10, 0), Vector3D(0, 30, 0), 0.98f, 1.f) {}
+        particle(Vector3D(0,0,0), Vector3D(10, 10, 0), Vector3D(0, 30, 0), Vector3D(1.f, 0.f, 0.f), 10.f, 9.81f, -1, 10.f) {}
 
     void init() override {
         
