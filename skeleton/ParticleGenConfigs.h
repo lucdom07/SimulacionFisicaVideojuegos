@@ -1,0 +1,55 @@
+#pragma once
+#include "PxPhysicsAPI.h"
+#include "core.hpp"
+#include "Vector3D.h"
+
+enum Distribution { UNIFORM, GAUSSIAN };
+
+struct UniformConfig {
+	float minVel;
+	float maxVel;
+
+	float minLife;
+	float maxLife;
+
+	float minSize;
+	float maxSize;
+
+	float minColorR;
+	float maxColorR;
+
+	float minColorG;
+	float maxColorG;
+
+	float minColorB;
+	float maxColorB;
+};
+
+struct GaussianConfig {
+	float meanVel;
+	float stddevVel;
+
+	float meanLife;
+	float stddevLife;
+
+	float meanSize;
+	float stddevSize;
+
+	float meanColorR;
+	float stddevColorR;
+
+	float meanColorG;
+	float stddevColorG;
+
+	float meanColorB;
+	float stddevColorB;
+};
+
+struct ParticleConfig {
+	Vector3D pos;
+	float mass;
+	Vector3D vel;
+	float life;
+	float size;
+	Vector3D color;
+};
