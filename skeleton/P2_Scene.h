@@ -7,6 +7,7 @@
 class P2_Scene :
     public Scene
 {
+public:
     explicit P2_Scene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
