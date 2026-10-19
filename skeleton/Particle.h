@@ -9,6 +9,9 @@ public:
 	Particle();
 	Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size);
 	virtual ~Particle();
+
+	bool isActive() { return active; };
+
 	void configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size);
 	void integrateEuler(double t);
 	virtual void integrateSemiEuler(double t);
@@ -19,6 +22,7 @@ public:
 	void countLifeTime(double t);
 	void decreaseOpacity(double t);
 	void decreaseSize(double t);
+
 protected:
 	bool active;
 

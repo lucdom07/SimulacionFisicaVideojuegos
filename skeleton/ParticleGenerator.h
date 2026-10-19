@@ -4,18 +4,22 @@
 class ParticleGenerator
 {
 public:
-	ParticleGenerator() {};
-	~ParticleGenerator();
-	std::vector<ParticleConfig> generateNewPartConfigs();
+	ParticleGenerator(GeneratorConfig& config);
+	~ParticleGenerator() {};
+
+	void update(double t, std::vector<ParticleConfig>& configs);
+protected:
+	void generateNewPartConfigs(std::vector<ParticleConfig>& configs);
 	ParticleConfig uniformAttribs();
 	ParticleConfig gaussianAttribs();
-protected:
+
 	Distribution distribType;
 	UniformConfig uniform;
 	GaussianConfig gaussian;
 
 	Vector3D velDir;
 	float partMass;
+	float timer;
 	float genTime;
 	int meanParts;
 	int varParts;

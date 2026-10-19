@@ -5,6 +5,7 @@
 
 enum Distribution { UNIFORM, GAUSSIAN };
 
+
 struct UniformConfig {
 	float minVel;
 	float maxVel;
@@ -52,4 +53,19 @@ struct ParticleConfig {
 	float life;
 	float size;
 	Vector3D color;
+};
+
+struct GeneratorConfig {
+	Distribution distribType;
+	UniformConfig uniform;
+	GaussianConfig gaussian;
+
+	Vector3D velDir;
+	float partMass;
+	float genTime;
+	int meanParts;
+	int varParts;
+	float emitRadius;
+
+	physx::PxTransform emitTrans;
 };

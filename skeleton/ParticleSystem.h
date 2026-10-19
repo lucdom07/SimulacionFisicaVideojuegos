@@ -3,15 +3,17 @@
 class ParticleGenerator;
 class Particle;
 struct ParticleConfig;
+struct GeneratorConfig;
 class ParticleSystem
 {
 public:
-	ParticleSystem();
+	ParticleSystem(GeneratorConfig& config);
 	~ParticleSystem();
 
 	void update(double dt);
-	void activateParticle(ParticleConfig config);
 private:
+	void activateParticle(ParticleConfig config);
+
 	const int N_PARTS = 100;
 	const float PARTS_GRAVITY = 10.f;
 	std::vector<Particle*> particles;

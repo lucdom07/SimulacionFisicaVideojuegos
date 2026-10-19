@@ -2,16 +2,28 @@
 #include <algorithm>
 #include "ParticleGenerator.h"
 
-std::vector<ParticleConfig> ParticleGenerator::generateNewPartConfigs() {
-	std::vector<ParticleConfig> particleConfigs;
+ParticleGenerator::ParticleGenerator(GeneratorConfig& config) : 
+	distribType(config.distribType), uniform(config.uniform), gaussian(config.gaussian), velDir(config.velDir), partMass(config.partMass),
+	timer(0), genTime(config.genTime), meanParts(config.meanParts), varParts(config.varParts), 
+	emitRadius(config.emitRadius), emitTrans(config.emitTrans)
+{
+}
+
+void ParticleGenerator::update(double t, std::vector<ParticleConfig>& configs) {
+	timer += t;
+	if (timer >= genTime) {
+		generateNewPartConfigs(configs);
+	}
+}
+
+void ParticleGenerator::generateNewPartConfigs(std::vector<ParticleConfig>& configs) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> partsDistrib(-varParts, varParts);
-	int nParts = (meanParts + partsDistrib(gen)) * screenSizeFactor;
+	int nParts = (meanParts + partsDistrib(gen));
 	for (int i = 0; i < nParts; i++) {
-		(distribType == GAUSSIAN) ? particleConfigs.push_back(gaussianAttribs()) : particleConfigs.push_back(uniformAttribs());
+		(distribType == GAUSSIAN) ? configs.push_back(gaussianAttribs()) : configs.push_back(uniformAttribs());
 	}
-	return particleConfigs;
 }
 
 ParticleConfig ParticleGenerator::uniformAttribs() {

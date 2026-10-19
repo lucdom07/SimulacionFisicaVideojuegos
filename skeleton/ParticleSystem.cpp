@@ -2,11 +2,36 @@
 #include "ParticleGenerator.h"
 #include "Particle.h"
 
-void ParticleSystem::update(double dt) {
+ParticleSystem::ParticleSystem(GeneratorConfig& config) : generator(new ParticleGenerator(config))
+{
+	particles.reserve(N_PARTS);
+	for (Particle* p : particles) {
+		p = new Particle();
+	}
+	firstInactive = particles.begin();
+}
 
+ParticleSystem::~ParticleSystem() {
+	delete generator;
+	for (Particle* p : particles) {
+		delete p;
+	}
+	particles.clear();
+}
+
+void ParticleSystem::update(double dt) {
+	std::vector<ParticleConfig> newParticles;
+	generator->update(dt, newParticles);
+	for (ParticleConfig& config : newParticles) {
+		activateParticle(config);
+	}
 }
 
 void ParticleSystem::activateParticle(ParticleConfig config) {
-	Particle* p = *firstInactive;
-	p->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
+	(*firstInactive)->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
+
+	while (!(*firstInactive)->isActive()) {
+		++firstInactive;
+		if (firstInactive == particles.end()) firstInactive = particles.begin();
+	}
 }
