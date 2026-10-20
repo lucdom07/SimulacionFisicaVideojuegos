@@ -4,7 +4,7 @@
 
 Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vector3D(0,0,0)))), lastPose(Vector3D(0, 0, 0)), 
 	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), invMass(1 / mass), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0) {
-	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.f));
+	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.00001f));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(0.f, 0.f, 0.f, 1.0f));
 };
 
