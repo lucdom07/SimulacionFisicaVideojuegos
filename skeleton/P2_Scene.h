@@ -14,7 +14,14 @@ public:
     void init() override {
         GeneratorConfig config{
             UNIFORM,
-            UniformConfig{},
+            UniformConfig{
+                5.f, 15.f,
+                5.f, 15.f,
+                7.f, 15.f,
+                0.1f, 1.f,
+                0.1f, 1.f,
+                0.1f, 1.f
+            },
             GaussianConfig{},
             Vector3D(0.f,1.f,0.f),
             10.f,
