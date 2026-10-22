@@ -39,8 +39,6 @@ protected:
 	const float sizeMod = 0.1f;
 	const float damping = 0.99f;
 	float mass;
-	//inverso de la masa
-	float invMass;
 	float lifeTime;
 	float lTimer;
 

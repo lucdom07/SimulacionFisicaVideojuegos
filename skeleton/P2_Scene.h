@@ -5,6 +5,7 @@
 #include "RenderUtils.hpp"
 #include "ParticleSystem.h"
 #include "ParticleGenConfigs.h"
+
 class P2_Scene :
     public Scene
 {
