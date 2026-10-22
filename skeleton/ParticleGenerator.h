@@ -17,7 +17,6 @@ protected:
 	UniformConfig uniform;
 	GaussianConfig gaussian;
 
-	Vector3D velDir;
 	float partMass;
 	float timer;
 	float genTime;

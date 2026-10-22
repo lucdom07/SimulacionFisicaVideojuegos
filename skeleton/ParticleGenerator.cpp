@@ -3,7 +3,7 @@
 #include "ParticleGenerator.h"
 
 ParticleGenerator::ParticleGenerator(GeneratorConfig& config) : 
-	distribType(config.distribType), uniform(config.uniform), gaussian(config.gaussian), velDir(config.velDir), partMass(config.partMass),
+	distribType(config.distribType), uniform(config.uniform), gaussian(config.gaussian), partMass(config.partMass),
 	timer(0), genTime(config.genTime), meanParts(config.meanParts), varParts(config.varParts), 
 	emitRadius(config.emitRadius), emitTrans(config.emitTrans)
 {
@@ -30,6 +30,12 @@ void ParticleGenerator::generateNewPartConfigs(std::vector<ParticleConfig>& conf
 ParticleConfig ParticleGenerator::uniformAttribs() {
 	std::random_device rd;
 	std::mt19937 gen(rd());	
+
+	std::uniform_real_distribution<> dirXDistrib(uniform.minDir.x, uniform.maxDir.x);
+	std::uniform_real_distribution<> dirYDistrib(uniform.minDir.y, uniform.maxDir.y);
+	std::uniform_real_distribution<> dirZDistrib(uniform.minDir.z, uniform.maxDir.z);
+	Vector3D dir(dirXDistrib(gen), dirYDistrib(gen), dirZDistrib(gen));
+
 	std::uniform_real_distribution<> velDistrib(uniform.minVel, uniform.maxVel);
 	std::uniform_real_distribution<> lifeDistrib(uniform.minLife, uniform.maxLife);
 	std::uniform_real_distribution<> sizeDistrib(uniform.minSize, uniform.maxSize);
@@ -37,15 +43,22 @@ ParticleConfig ParticleGenerator::uniformAttribs() {
 	std::uniform_real_distribution<> colorGDistrib(uniform.minColorG, uniform.maxColorG);
 	std::uniform_real_distribution<> colorBDistrib(uniform.minColorB, uniform.maxColorB);
 	std::uniform_real_distribution<> posDistrib(-emitRadius, emitRadius);
+
 	Vector3D pPos(emitTrans.p.x + posDistrib(gen), emitTrans.p.y, emitTrans.p.z + posDistrib(gen));
 
-	return ParticleConfig{ pPos, partMass, velDir.normalize() * (float)velDistrib(gen), (float)lifeDistrib(gen), (float)sizeDistrib(gen),
+	return ParticleConfig{ pPos, partMass, dir.normalize() * (float)velDistrib(gen), (float)lifeDistrib(gen), (float)sizeDistrib(gen),
 		Vector3D((float)colorRDistrib(gen), (float)colorGDistrib(gen), (float)colorBDistrib(gen)) };
 }
 
 ParticleConfig ParticleGenerator::gaussianAttribs() {
 	std::random_device rd;
 	std::mt19937 gen(rd());
+
+	std::normal_distribution<float> dirXDistrib(gaussian.meanDir.x, gaussian.stddevDir.x);
+	std::normal_distribution<float> dirYDistrib(gaussian.meanDir.y, gaussian.stddevDir.y);
+	std::normal_distribution<float> dirZDistrib(gaussian.meanDir.z, gaussian.stddevDir.z);
+	Vector3D dir(dirXDistrib(gen), dirYDistrib(gen), dirZDistrib(gen));
+
 	std::normal_distribution<float> velDistrib(gaussian.meanVel, gaussian.stddevVel);
 	std::normal_distribution<float> lifeDistrib(gaussian.meanLife, gaussian.stddevLife);
 	std::normal_distribution<float> sizeDistrib(gaussian.meanSize, gaussian.stddevSize);
@@ -55,6 +68,6 @@ ParticleConfig ParticleGenerator::gaussianAttribs() {
 	std::uniform_real_distribution<> posDistrib(-emitRadius, emitRadius);
 	Vector3D pPos(emitTrans.p.x + posDistrib(gen), emitTrans.p.y, emitTrans.p.z + posDistrib(gen));
 
-	return ParticleConfig{ pPos, partMass, velDir.normalize() * velDistrib(gen), lifeDistrib(gen), sizeDistrib(gen),
+	return ParticleConfig{ pPos, partMass, dir.normalize() * velDistrib(gen), lifeDistrib(gen), sizeDistrib(gen),
 		Vector3D(colorRDistrib(gen), colorGDistrib(gen), colorBDistrib(gen)) };
 }

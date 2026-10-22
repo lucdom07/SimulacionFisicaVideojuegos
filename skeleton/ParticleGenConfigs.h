@@ -7,6 +7,9 @@ enum Distribution { UNIFORM, GAUSSIAN };
 
 
 struct UniformConfig {
+	Vector3D minDir;
+	Vector3D maxDir;
+
 	float minVel;
 	float maxVel;
 
@@ -27,6 +30,9 @@ struct UniformConfig {
 };
 
 struct GaussianConfig {
+	Vector3D meanDir;
+	Vector3D stddevDir;
+
 	float meanVel;
 	float stddevVel;
 

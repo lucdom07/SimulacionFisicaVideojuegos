@@ -16,7 +16,8 @@ public:
         GeneratorConfig config{
             UNIFORM, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
-                60.f, 70.f, //velocidad
+                Vector3D(0.f, 1.f, 0.f), Vector3D(0.2f, 1.f, 0.2f), // dirección velocidad
+                60.f, 70.f, //magnitud velocidad
                 1.f, 2.f, //vida
                 1.f, 2.f, //tamaño
                 0.1f, 1.f, // color rojo
@@ -26,8 +27,8 @@ public:
             GaussianConfig{}, // Configuración distribución gaussiana
             Vector3D(0.f,1.f,0.f),
             10.f, // masa
-            0.3f, // tiempo de generación
-            20, // media partículas
+            0.1f, // tiempo de generación
+            60, // media partículas
             10, // varianza partículas
             10.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
