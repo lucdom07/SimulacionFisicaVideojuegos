@@ -3,14 +3,14 @@
 #include "RenderUtils.hpp"
 
 Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vector3D(0,0,0)))), lastPose(Vector3D(0, 0, 0)), 
-	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0) {
+	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0), initSize(0.f) {
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.1f));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(0.f, 0.f, 0.f, 0.f));
 };
 
 Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) :
 	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), 
-	mass(m), gravity(Vector3D(0, -g, 0)), lifeTime(life), lTimer(0) {
+	mass(m), gravity(Vector3D(0, -g, 0)), lifeTime(life), lTimer(0), initSize(size) {
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
 };
@@ -27,12 +27,13 @@ void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D 
 	lastPose = pos;
 	vel = pvel; 
 	acc = a;
+	initSize = size;
 	mass = m; 
 	gravity = Vector3D(0, -g, 0); 
 	lifeTime = life; 
 	lTimer = 0;
 
-	if (renderItem) delete renderItem;
+	if (renderItem) renderItem->release();
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
 }
@@ -72,14 +73,18 @@ void Particle::countLifeTime(double t) {
 
 void Particle::decreaseOpacity(double t) {
 	if (!active) return;
-	renderItem->color.w -= opacMod * (t/lifeTime);
+	float newOpac = renderItem->color.w - (t / lifeTime);
+	if (newOpac < 0.f) newOpac = 0;
+	renderItem->color.w = newOpac;
 }
 
 void Particle::decreaseSize(double t) {
 	if (!active) return;
-	float newSize = renderItem->shape->getGeometry().sphere().radius - (sizeMod * (t / lifeTime));
+	float newSize = renderItem->shape->getGeometry().sphere().radius - (t / lifeTime) * initSize;
+	if (newSize < 0) newSize = 0.00001f;
 	Vector4 currColor = renderItem->color;
-	if (renderItem) delete renderItem;
+
+	if (renderItem) renderItem->release();
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(newSize));
 	renderItem = new RenderItem(sphereShape, &pose, currColor);
 }

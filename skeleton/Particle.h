@@ -33,11 +33,8 @@ protected:
 	const float massMod = 0.1f; 
 	// indica cuánto cambia la gravedad por cada pulsación
 	const float gravMod = 0.1f; 
-	// indica cuánto cambia la opacidad según el tiempo
-	const float opacMod = 0.1f;
-	// indica cuánto cambia el tamaño según el tiempo
-	const float sizeMod = 0.1f;
 	const float damping = 0.99f;
+	float initSize;
 	float mass;
 	float lifeTime;
 	float lTimer;
