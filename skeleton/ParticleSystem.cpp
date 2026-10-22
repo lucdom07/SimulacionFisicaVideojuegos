@@ -24,6 +24,10 @@ void ParticleSystem::update(double dt) {
 	for (ParticleConfig& config : newParticles) {
 		activateParticle(config);
 	}
+
+	for (Particle* p : particles) {
+		p->integrateSemiEuler(dt);
+	}
 }
 
 void ParticleSystem::activateParticle(ParticleConfig config) {

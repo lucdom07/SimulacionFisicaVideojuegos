@@ -16,9 +16,9 @@ public:
         GeneratorConfig config{
             UNIFORM,
             UniformConfig{
-                5.f, 15.f,
-                5.f, 15.f,
-                7.f, 15.f,
+                0.1f, 1.f,
+                30.f, 60.f,
+                1.f, 10.f,
                 0.1f, 1.f,
                 0.1f, 1.f,
                 0.1f, 1.f
@@ -29,7 +29,7 @@ public:
             0.3f,
             20,
             10,
-            100.f,
+            10.f,
             physx::PxTransform(Vector3(0,0,0))
         };
         particleSys = new ParticleSystem(config);

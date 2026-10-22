@@ -13,6 +13,7 @@ void ParticleGenerator::update(double t, std::vector<ParticleConfig>& configs) {
 	timer += t;
 	if (timer >= genTime) {
 		generateNewPartConfigs(configs);
+		timer = 0.f;
 	}
 }
 
