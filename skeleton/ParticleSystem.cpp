@@ -26,14 +26,16 @@ void ParticleSystem::update(double dt) {
 	}
 
 	for (Particle* p : particles) {
-		p->integrateSemiEuler(dt);
+		if (p->isActive()) p->update(dt);
 	}
 }
 
 void ParticleSystem::activateParticle(ParticleConfig config) {
-	(*firstInactive)->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
-	while ((*firstInactive)->isActive()) {
+	if (!(*firstInactive)->isActive()) (*firstInactive)->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
+	int i = 0;
+	while ((*firstInactive)->isActive() && i < N_PARTS) {
 		++firstInactive;
 		if (firstInactive == particles.end()) firstInactive = particles.begin();
+		i++;
 	}
 }

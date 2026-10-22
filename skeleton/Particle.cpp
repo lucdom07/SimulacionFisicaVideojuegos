@@ -22,6 +22,13 @@ Particle::~Particle() {
 	}
 }
 
+void Particle::update(double dt) {
+	countLifeTime(dt);
+	integrateSemiEuler(dt);
+	decreaseOpacity(dt);
+	decreaseSize(dt);
+}
+
 void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) {
 	pose = physx::PxTransform(physx::PxVec3(pos));
 	lastPose = pos;
@@ -46,7 +53,6 @@ void Particle::integrateEuler(double t) {
 }
 
 void Particle::integrateSemiEuler(double t) {
-	if (!active) return;
 	vel = vel + gravity * mass * t;
 	vel = vel * pow(damping, t);
 	pose.p = pose.p + physx::PxVec3(vel * t + gravity * mass * 0.5f * t * t);
@@ -69,12 +75,15 @@ void Particle::changeGravity(bool increase) {
 void Particle::countLifeTime(double t) {
 	if (!active) return;
 	lTimer += t;
-	if (lTimer >= lifeTime) active = false;
+	if (lTimer >= lifeTime) {
+		active = false;
+		lTimer = 0;
+	}
 }
 
 void Particle::decreaseOpacity(double t) {
 	if (!active) return;
-	float newOpac = renderItem->color.w - (t / lifeTime);
+	float newOpac = renderItem->color.w - std::powf(t / lifeTime, 9);
 	if (newOpac < 0.f) newOpac = 0;
 	renderItem->color.w = newOpac;
 }

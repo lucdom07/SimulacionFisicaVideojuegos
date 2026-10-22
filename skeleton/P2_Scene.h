@@ -14,23 +14,23 @@ public:
 
     void init() override {
         GeneratorConfig config{
-            UNIFORM,
-            UniformConfig{
-                0.1f, 1.f,
-                30.f, 60.f,
-                1.f, 10.f,
-                0.1f, 1.f,
-                0.1f, 1.f,
-                0.1f, 1.f
+            UNIFORM, //Tipo de distribución
+            UniformConfig{ // Configuración distribución uniforme
+                60.f, 70.f, //velocidad
+                1.f, 2.f, //vida
+                1.f, 2.f, //tamaño
+                0.1f, 1.f, // color rojo
+                0.1f, 1.f, //color verde
+                0.1f, 1.f // color azul
             },
-            GaussianConfig{},
+            GaussianConfig{}, // Configuración distribución gaussiana
             Vector3D(0.f,1.f,0.f),
-            10.f,
-            0.3f,
-            20,
-            10,
-            10.f,
-            physx::PxTransform(Vector3(0,0,0))
+            10.f, // masa
+            0.3f, // tiempo de generación
+            20, // media partículas
+            10, // varianza partículas
+            10.f, //radio de emisión
+            physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
         particleSys = new ParticleSystem(config);
     }
