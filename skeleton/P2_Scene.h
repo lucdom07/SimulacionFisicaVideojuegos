@@ -39,7 +39,7 @@ public:
             UniformConfig{ // Configuración distribución uniforme
             },
             GaussianConfig{ // Configuración distribución gaussiana
-                Vector3D(0.f, 1.f, 0.f), Vector3D(0.1f, 0.0001f, 0.1f), // dirección velocidad
+                Vector3D(0.f, 1.f, 0.f), Vector3D(0.05f, 0.0001f, 0.05f), // dirección velocidad
                 15.f, 5.f, //magnitud velocidad
                 2.f, 0.5f, //vida
                 1.f, 0.5f, //tamaño
@@ -49,7 +49,7 @@ public:
             }, 
             Vector3D(0.f,1.f,0.f),
             10.f, // masa
-            0.05f, // tiempo de generación
+            0.1f, // tiempo de generación
             90, // media partículas
             10, // varianza partículas
             2.f, //radio de emisión
@@ -61,17 +61,17 @@ public:
             UniformConfig{ // Configuración distribución uniforme
             },
             GaussianConfig{ // Configuración distribución gaussiana
-                Vector3D(0.f, 1.f, 0.f), Vector3D(0.1f, 0.0001f, 0.1f), // dirección velocidad
+                Vector3D(0.f, 1.f, 0.f), Vector3D(0.01f, 0.0001f, 0.01f), // dirección velocidad
                 1.f, 0.5f, //magnitud velocidad
-                2.f, 0.5f, //vida
+                4.f, 0.5f, //vida
                 1.f, 0.5f, //tamaño
                 0.5f, 0.1f, // color rojo
                 0.3f, 0.1f, //color verde
-                1.f, 0.1f // color azul
+                0.9f, 0.1f // color azul
             },
             Vector3D(0.f,1.f,0.f),
             50.f, // masa
-            0.05f, // tiempo de generación
+            0.1f, // tiempo de generación
             90, // media partículas
             10, // varianza partículas
             20.f, //radio de emisión
