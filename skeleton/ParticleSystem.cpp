@@ -31,11 +31,11 @@ void ParticleSystem::update(double dt) {
 }
 
 void ParticleSystem::activateParticle(ParticleConfig config) {
-	if (!(*firstInactive)->isActive()) (*firstInactive)->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
 	int i = 0;
 	while ((*firstInactive)->isActive() && i < N_PARTS) {
 		++firstInactive;
 		if (firstInactive == particles.end()) firstInactive = particles.begin();
 		i++;
 	}
+	if (!(*firstInactive)->isActive()) (*firstInactive)->configParticle(config.pos, config.vel, Vector3D(0,0,0), config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
 }

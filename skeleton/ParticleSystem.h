@@ -14,7 +14,7 @@ public:
 private:
 	void activateParticle(ParticleConfig config);
 
-	const int N_PARTS = 500;
+	const int N_PARTS = 200;
 	const float PARTS_GRAVITY = 10.f;
 	std::vector<Particle*> particles;
 	using particle_it = std::vector<Particle*>::iterator;
