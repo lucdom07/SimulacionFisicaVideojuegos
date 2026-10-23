@@ -16,7 +16,7 @@ public:
         GeneratorConfig config{
             UNIFORM, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
-                Vector3D(0.f, 1.f, 0.f), Vector3D(0.2f, 1.f, 0.2f), // dirección velocidad
+                Vector3D(0.f, 1.f, 0.f), Vector3D(0.5f, 1.f, 0.5f), // dirección velocidad
                 15.f, 20.f, //magnitud velocidad
                 2.f, 5.f, //vida
                 1.f, 2.f, //tamaño
