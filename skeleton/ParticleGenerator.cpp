@@ -61,13 +61,23 @@ ParticleConfig ParticleGenerator::gaussianAttribs() {
 
 	std::normal_distribution<float> velDistrib(gaussian.meanVel, gaussian.stddevVel);
 	std::normal_distribution<float> lifeDistrib(gaussian.meanLife, gaussian.stddevLife);
+	float life = lifeDistrib(gen);
+	if (life < 0) life = 0.1f;
 	std::normal_distribution<float> sizeDistrib(gaussian.meanSize, gaussian.stddevSize);
+	float size = sizeDistrib(gen);
+	if (size < 0) size = 0.1f;
 	std::normal_distribution<float> colorRDistrib(gaussian.meanColorR, gaussian.stddevColorR);
+	float r = colorRDistrib(gen);
+	if (r < 0) r = 0.01f;
 	std::normal_distribution<float> colorGDistrib(gaussian.meanColorG, gaussian.stddevColorG);
+	float g = colorGDistrib(gen);
+	if (g < 0) g = 0.01f;
 	std::normal_distribution<float> colorBDistrib(gaussian.meanColorB, gaussian.stddevColorB);
 	std::uniform_real_distribution<> posDistrib(-emitRadius, emitRadius);
 	Vector3D pPos(emitTrans.p.x + posDistrib(gen), emitTrans.p.y, emitTrans.p.z + posDistrib(gen));
+	float b = colorBDistrib(gen);
+	if (b < 0) b = 0.01f;
 
-	return ParticleConfig{ pPos, partMass, dir.normalize() * velDistrib(gen), lifeDistrib(gen), sizeDistrib(gen),
-		Vector3D(colorRDistrib(gen), colorGDistrib(gen), colorBDistrib(gen)) };
+	return ParticleConfig{ pPos, partMass, dir.normalize() * velDistrib(gen), life, size,
+		Vector3D(r, g, b) };
 }

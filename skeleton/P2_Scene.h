@@ -34,6 +34,28 @@ public:
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
         partSys.push_back(new ParticleSystem(config));
+        config = {
+            GAUSSIAN, //Tipo de distribución
+            UniformConfig{ // Configuración distribución uniforme
+            },
+            GaussianConfig{ // Configuración distribución gaussiana
+                Vector3D(0.f, 1.f, 0.f), Vector3D(0.1f, 0.0001f, 0.1f), // dirección velocidad
+                15.f, 5.f, //magnitud velocidad
+                3.f, 1.f, //vida
+                2.f, 1.f, //tamaño
+                1.f, 0.1f, // color rojo
+                0.2f, 0.1f, //color verde
+                0.1f, 0.1f // color azul
+            }, 
+            Vector3D(0.f,1.f,0.f),
+            10.f, // masa
+            0.05f, // tiempo de generación
+            90, // media partículas
+            10, // varianza partículas
+            10.f, //radio de emisión
+            physx::PxTransform(Vector3(40,0,0)) //transform del emisor
+        };
+        partSys.push_back(new ParticleSystem(config));
     }
 
     void update(double dt) override {
