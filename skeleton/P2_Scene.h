@@ -10,15 +10,15 @@ class P2_Scene :
     public Scene
 {
 public:
-    explicit P2_Scene(std::string name) : Scene(std::move(name)), particleSys(nullptr) {}
+    explicit P2_Scene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
         GeneratorConfig config{
             UNIFORM, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
                 Vector3D(0.f, 1.f, 0.f), Vector3D(0.2f, 1.f, 0.2f), // dirección velocidad
-                60.f, 70.f, //magnitud velocidad
-                1.f, 2.f, //vida
+                15.f, 20.f, //magnitud velocidad
+                2.f, 5.f, //vida
                 1.f, 2.f, //tamaño
                 0.1f, 1.f, // color rojo
                 0.1f, 1.f, //color verde
@@ -27,27 +27,30 @@ public:
             GaussianConfig{}, // Configuración distribución gaussiana
             Vector3D(0.f,1.f,0.f),
             10.f, // masa
-            0.1f, // tiempo de generación
-            60, // media partículas
+            0.05f, // tiempo de generación
+            90, // media partículas
             10, // varianza partículas
             10.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
-        particleSys = new ParticleSystem(config);
+        partSys.push_back(new ParticleSystem(config));
     }
 
     void update(double dt) override {
-        particleSys->update(dt);
+        for (ParticleSystem* s : partSys) {
+            s->update(dt);
+        }
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
     }
 
     void cleanup() override {
-        delete particleSys;
+        for (ParticleSystem* s : partSys) {
+            delete s;
+        }
     }
-
 private:
-    ParticleSystem* particleSys;
+    std::vector<ParticleSystem*> partSys;
 };
 

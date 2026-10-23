@@ -30,7 +30,8 @@ protected:
 
 	Vector3D vel;
 	Vector3D acc;
-	
+	// modificador para la velocidad simulada
+	const float simVelMod = 0.01f;
 	// indica cuánto cambia la masa por cada pulsación
 	const float massMod = 0.1f; 
 	// indica cuánto cambia la gravedad por cada pulsación

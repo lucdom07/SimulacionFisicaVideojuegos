@@ -10,7 +10,10 @@ Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vect
 
 Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) :
 	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), 
-	mass(m), gravity(Vector3D(0, -g, 0)), lifeTime(life), lTimer(0), initSize(size) {
+	lifeTime(life), lTimer(0), initSize(size) {
+	mass = m * std::powf((pvel.magnitude() / pvel.magnitude() * simVelMod), 2.f);
+	float simGrav = g * std::powf(pvel.magnitude() * simVelMod / pvel.magnitude(), 2.f);
+	gravity = Vector3D(0, -simGrav, 0);
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
 };
@@ -35,10 +38,12 @@ void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D 
 	vel = pvel; 
 	acc = a;
 	initSize = size;
-	mass = m; 
-	gravity = Vector3D(0, -g, 0); 
 	lifeTime = life; 
 	lTimer = 0;
+
+	mass = m * std::powf((pvel.magnitude() / pvel.magnitude() * simVelMod), 2.f);
+	float simGrav = g * std::powf(pvel.magnitude() * simVelMod / pvel.magnitude(), 2.f);
+	gravity = Vector3D(0, -simGrav, 0);
 
 	if (renderItem) renderItem->release();
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
