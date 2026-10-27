@@ -263,6 +263,8 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="P0_Scene.cpp" />
     <ClCompile Include="P1_Scene.cpp" />
@@ -280,6 +282,8 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="EmptyScene.h" />
+    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="P0_Scene.h" />
     <ClInclude Include="P1_Scene.h" />
     <ClInclude Include="Particle.h" />

@@ -7,29 +7,34 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size);
+	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size);
 	virtual ~Particle();
 
 	bool isActive() { return active; };
 
-	void update(double dt);
+	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size);
 
-	void configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size);
-	void integrateEuler(double t);
+	void update(double dt);
+	void cleanAcumulator();
+	void acumulateForce(Vector3D F, float dt);
 	virtual void integrateSemiEuler(double t);
-	void integrateVerlet(double t);
+
 	void changeMass(bool increase);
 	void changeGravity(bool increase);
-	//suma el delta time al contador de tiempo de vida de la partícula. Devuelve true si ya ha superado su tiempo de vida y false en caso contrario
+protected:
+	//suma el delta time al contador de tiempo de vida de la partícula
 	void countLifeTime(double t);
 	void decreaseOpacity(double t);
 	void decreaseSize(double t);
 
-protected:
+	//indica si la partícula está activa
 	bool active;
 
 	Vector3D vel;
 	Vector3D acc;
+	//acumulador de fuerzas
+	Vector3D f;
+
 	// modificador para la velocidad simulada
 	const float simVelMod = 0.01f;
 	// indica cuánto cambia la masa por cada pulsación
@@ -39,6 +44,8 @@ protected:
 	const float damping = 0.99f;
 	float initSize;
 	float mass;
+	// inverso de la masa
+	float invMass;
 	float lifeTime;
 	float lTimer;
 
