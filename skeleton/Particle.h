@@ -7,12 +7,12 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size);
+	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
 	virtual ~Particle();
 
 	bool isActive() { return active; };
 
-	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size);
+	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
 
 	void update(double dt);
 	void cleanAcumulator();
@@ -20,7 +20,6 @@ public:
 	virtual void integrateSemiEuler(double t);
 
 	void changeMass(bool increase);
-	void changeGravity(bool increase);
 protected:
 	//suma el delta time al contador de tiempo de vida de la partícula
 	void countLifeTime(double t);
@@ -51,7 +50,6 @@ protected:
 
 	physx::PxTransform pose;
 	Vector3D lastPose;	
-	Vector3D gravity;
 
 	RenderItem* renderItem;
 };

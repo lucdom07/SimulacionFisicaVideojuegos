@@ -14,6 +14,7 @@ public:
     }
 
     void update(double dt) override {
+
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {

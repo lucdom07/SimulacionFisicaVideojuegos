@@ -37,5 +37,5 @@ void ParticleSystem::activateParticle(ParticleConfig config) {
 		if (firstInactive == particles.end()) firstInactive = particles.begin();
 		i++;
 	}
-	if (!(*firstInactive)->isActive()) (*firstInactive)->configParticle(config.pos, config.vel, config.color, config.mass, PARTS_GRAVITY, config.life, config.size);
+	if (!(*firstInactive)->isActive()) (*firstInactive)->configParticle(config.pos, config.vel, config.color, config.mass, config.life, config.size);
 }
