@@ -2,6 +2,8 @@
 #include <vector>
 class ParticleGenerator;
 class Particle;
+class ForceRegistry;
+class ForceGenerator;
 struct ParticleConfig;
 struct GeneratorConfig;
 class ParticleSystem
@@ -11,6 +13,7 @@ public:
 	~ParticleSystem();
 
 	void update(double dt);
+	void addForce(ForceGenerator* f);
 private:
 	void activateParticle(ParticleConfig config);
 
@@ -20,4 +23,5 @@ private:
 	using particle_it = std::vector<Particle*>::iterator;
 	particle_it firstInactive;
 	ParticleGenerator* generator;
+	ForceRegistry* fReg;
 };

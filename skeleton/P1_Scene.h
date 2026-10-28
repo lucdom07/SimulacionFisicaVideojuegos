@@ -11,11 +11,6 @@ public:
     explicit P1_Scene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
-        //CREACIÓN GENERADORES DE FUERZAS
-        GravityGenerator* gravGen = new GravityGenerator(9.81f);
-        forces.push_back(gravGen);
-        gravGen = new GravityGenerator(-5.f);
-        forces.push_back(gravGen);
         // CREACIÓN SISTEMAS DE PARTÍCULAS
         GeneratorConfig config;
         config = {
@@ -42,6 +37,13 @@ public:
         partSys.push_back(new ParticleSystem(config));
         config.emitTrans.p.x = 40.f;
         partSys.push_back(new ParticleSystem(config));
+        //CREACIÓN GENERADORES DE FUERZAS
+        GravityGenerator* gravGen = new GravityGenerator(9.81f);
+        partSys[0]->addForce(gravGen);
+        forces.push_back(gravGen);
+        gravGen = new GravityGenerator(-5.f);
+        partSys[1]->addForce(gravGen);
+        forces.push_back(gravGen);
     }
 
     void update(double dt) override {
@@ -56,6 +58,9 @@ public:
     void cleanup() override {
         for (ParticleSystem* s : partSys) {
             delete s;
+        }
+        for (ForceGenerator* f : forces) {
+            delete f;
         }
     }
 private:

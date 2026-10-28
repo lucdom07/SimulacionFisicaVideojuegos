@@ -1,8 +1,9 @@
 #include "ParticleSystem.h"
 #include "ParticleGenerator.h"
 #include "Particle.h"
+#include "ForceRegistry.h"
 
-ParticleSystem::ParticleSystem(GeneratorConfig& config) : generator(new ParticleGenerator(config))
+ParticleSystem::ParticleSystem(GeneratorConfig& config) : generator(new ParticleGenerator(config)), fReg(new ForceRegistry())
 {
 	for (int i = 0; i < N_PARTS; i++) {
 		particles.push_back(new Particle());
@@ -25,8 +26,16 @@ void ParticleSystem::update(double dt) {
 		activateParticle(config);
 	}
 
+	fReg->applyForce(dt);
+
 	for (Particle* p : particles) {
 		if (p->isActive()) p->update(dt);
+	}
+}
+
+void ParticleSystem::addForce(ForceGenerator* f) {
+	for (Particle* p : particles) {
+		fReg->registerPair(p, f);
 	}
 }
 
