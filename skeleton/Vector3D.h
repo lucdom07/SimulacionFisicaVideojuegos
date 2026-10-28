@@ -26,7 +26,7 @@ public:
 		return Vector3D(this->y * v.z - this->z * v.y, this->z * v.x - this->x * v.z, this->x * v.y - this->y * v.x);
 	};
 
-	Vector3D& operator=(const Vector3D& v) {
+	Vector3D operator=(const Vector3D& v) {
 		if (&v == this) return *this;
 		this->x = v.x;
 		this->y = v.y;
@@ -34,26 +34,26 @@ public:
 		return *this;
 	};
 
-	Vector3D& operator+(const Vector3D& v) {
+	Vector3D operator+(const Vector3D& v) {
 		return Vector3D(this->x + v.x, this->y + v.y, this->z + v.z);
 	};
 
-	Vector3D& operator-(const Vector3D& v) {
+	Vector3D operator-(const Vector3D& v) {
 		return Vector3D(this->x - v.x, this->y - v.y, this->z - v.z);
 	};
 
-	Vector3D& operator*(float s) {
+	Vector3D operator*(float s) {
 		return Vector3D(this->x * s, this->y * s, this->z * s);
 	};
 
-	Vector3D& operator+=(const Vector3D& v) {
+	Vector3D operator+=(const Vector3D& v) {
 		this->x += v.x;
 		this->y += v.y;
 		this->z += v.z;
 		return *this;
 	};
 
-	Vector3D& operator-=(const Vector3D& v) {
+	Vector3D operator-=(const Vector3D& v) {
 		this->x -= v.x;
 		this->y -= v.y;
 		this->z -= v.z;
@@ -64,7 +64,7 @@ public:
 		return physx::PxVec3(this->x, this->y, this->z);
 	}
 
-	Vector3D& operator=(const physx::PxVec3& v) {
+	Vector3D operator=(const physx::PxVec3& v) {
 		this->x = v.x;
 		this->y = v.y;
 		this->z = v.z;
