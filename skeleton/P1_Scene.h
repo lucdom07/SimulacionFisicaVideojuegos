@@ -27,7 +27,7 @@ public:
                 0.1f, 0.1f // color azul
             },
             Vector3D(0.f,1.f,0.f),
-            1000.f, // masa
+            10000.f, // masa
             1.f, // tiempo de generación
             1, // media partículas
             1, // varianza partículas
@@ -35,12 +35,20 @@ public:
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
         partSys.push_back(new ParticleSystem(config));
+
         config.emitTrans.p.x = 40.f;
         partSys.push_back(new ParticleSystem(config));
+
+        config.emitTrans.p.x = -40.f;
+        config.partMass = 0.1f;
+        partSys.push_back(new ParticleSystem(config));
+
         //CREACIÓN GENERADORES DE FUERZAS
         GravityGenerator* gravGen = new GravityGenerator(9.81f);
         partSys[0]->addForce(gravGen);
+        partSys[2]->addForce(gravGen);
         forces.push_back(gravGen);
+
         gravGen = new GravityGenerator(-5.f);
         partSys[1]->addForce(gravGen);
         forces.push_back(gravGen);
