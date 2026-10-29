@@ -12,6 +12,5 @@ void ForceRegistry::applyForce(double t) {
 		for (ForceGenerator* fGen : fGenVec) {
 			fGen->updateForce(part, t);
 		}
-		part->integrateSemiEuler(t);
 	}
 }

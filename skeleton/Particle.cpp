@@ -24,6 +24,7 @@ Particle::~Particle() {
 
 void Particle::update(double dt) {
 	countLifeTime(dt);
+	integrateSemiEuler(dt);
 	decreaseOpacity(dt);
 	decreaseSize(dt);
 }
