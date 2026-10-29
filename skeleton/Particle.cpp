@@ -4,7 +4,7 @@
 
 Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vector3D(0,0,0)))), lastPose(Vector3D(0, 0, 0)), 
 	vel(Vector3D(0, 0, 0)), acc(Vector3D(0,0,0)), f(Vector3D()), mass(0.f), invMass(0.f), lifeTime(0), lTimer(0), initSize(0.f) {
-	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.1f));
+	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.0001f));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(0.f, 0.f, 0.f, 0.f));
 };
 
@@ -32,8 +32,8 @@ void Particle::cleanAcumulator() {
 	f = Vector3D();
 }
 
-void Particle::acumulateForce(Vector3D F, float dt) {
-	f += F * dt;
+void Particle::acumulateForce(Vector3D F) {
+	f += F;
 }
 
 void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size) {
@@ -44,6 +44,8 @@ void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float
 	initSize = size;
 	lifeTime = life; 
 	lTimer = 0;
+	mass = m;
+	invMass = 1 / mass;
 
 	if (renderItem) renderItem->release();
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));

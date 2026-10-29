@@ -20,17 +20,17 @@ public:
             GaussianConfig{ // Configuración distribución gaussiana
                 Vector3D(0.f, 1.f, 0.f), Vector3D(0.05f, 0.0001f, 0.05f), // dirección velocidad
                 15.f, 5.f, //magnitud velocidad
-                2.f, 0.5f, //vida
+                15.f, 0.5f, //vida
                 1.f, 0.5f, //tamaño
                 1.f, 0.1f, // color rojo
                 0.3f, 0.1f, //color verde
                 0.1f, 0.1f // color azul
             },
             Vector3D(0.f,1.f,0.f),
-            10.f, // masa
-            0.1f, // tiempo de generación
-            90, // media partículas
-            10, // varianza partículas
+            1000.f, // masa
+            1.f, // tiempo de generación
+            1, // media partículas
+            1, // varianza partículas
             2.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };

@@ -10,13 +10,14 @@ public:
 	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
 	virtual ~Particle();
 
+	float getMass() { return mass; };
 	bool isActive() { return active; };
 
 	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
 
 	void update(double dt);
 	void cleanAcumulator();
-	void acumulateForce(Vector3D F, float dt);
+	void acumulateForce(Vector3D F);
 	virtual void integrateSemiEuler(double t);
 
 	void changeMass(bool increase);
@@ -34,12 +35,9 @@ protected:
 	//acumulador de fuerzas
 	Vector3D f;
 
-	// modificador para la velocidad simulada
-	const float simVelMod = 0.01f;
+
 	// indica cuánto cambia la masa por cada pulsación
 	const float massMod = 0.1f; 
-	// indica cuánto cambia la gravedad por cada pulsación
-	const float gravMod = 0.1f; 
 	const float damping = 0.99f;
 	float initSize;
 	float mass;
