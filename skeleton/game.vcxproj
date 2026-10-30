@@ -278,6 +278,7 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="WhirlGenerator.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
     <ClCompile Include="WindScene.cpp" />
   </ItemGroup>
@@ -301,6 +302,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="WhirlGenerator.h" />
     <ClInclude Include="WindGenerator.h" />
     <ClInclude Include="WindScene.h" />
   </ItemGroup>

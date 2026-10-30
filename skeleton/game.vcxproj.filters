@@ -23,6 +23,7 @@
     <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="WindScene.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
+    <ClCompile Include="WhirlGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="ParticleGenConfigs.h" />
     <ClInclude Include="WindScene.h" />
     <ClInclude Include="WindGenerator.h" />
+    <ClInclude Include="WhirlGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
