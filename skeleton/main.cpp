@@ -25,6 +25,7 @@
 #include "P0_Scene.h"
 #include "P1_Scene.h"
 #include "WindScene.h"
+#include "WhirlScene.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -104,6 +105,7 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<P0_Scene>("P0_Scene");
 	SceneManager::instance().registerScene<P1_Scene>("P1_Scene");
 	SceneManager::instance().registerScene<WindScene>("WindScene");
+	SceneManager::instance().registerScene<WhirlScene>("WhirlScene");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");
