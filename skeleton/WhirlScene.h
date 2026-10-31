@@ -3,6 +3,7 @@
 #include "RenderUtils.hpp"
 #include "ParticleSystem.h"
 #include "ParticleGenConfigs.h"
+#include "WhirlGenerator.h"
 class WhirlScene :
     public Scene
 {
@@ -27,16 +28,16 @@ public:
             },
             Vector3D(0.f,1.f,0.f),
             1000.f, // masa
-            1.f, // tiempo de generación
-            1, // media partículas
+            0.5f, // tiempo de generación
+            20, // media partículas
             1, // varianza partículas
             2.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
         partSys.push_back(new ParticleSystem(config));
-        //WindGenerator* wind = new WindGenerator(Vector3D(10.f, 10.f, 10.f), Vector3D(0.f, 20.f, 0.f), Vector3D(1000.f, 0.f, 0.f), 7.f);
-        //partSys[0]->addForce(wind);
-        //forces.push_back(wind);
+        WhirlGenerator* whirl = new WhirlGenerator(Vector3D(10.f, 40.f, 10.f), Vector3D(0.f, 40.f, 0.f), 20.f);
+        partSys[0]->addForce(whirl);
+        forces.push_back(whirl);
     }
 
     void update(double dt) override {

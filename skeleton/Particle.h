@@ -11,6 +11,7 @@ public:
 	virtual ~Particle();
 
 	float getMass() { return mass; };
+	physx::PxVec3 getPos() { return pose.p; };
 	Vector3D getVel() { return vel; };
 	RenderItem* getRendeItem() { return renderItem; };
 	bool isActive() { return active; };
