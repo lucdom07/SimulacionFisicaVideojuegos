@@ -107,11 +107,11 @@ void renderCallback()
 			auto actor = obj->actor;
 			if (actor)
 			{
-				renderShape(*obj->shape, actor->getGlobalPose(), obj->color);
+				if (obj->color.w > 0.01f) renderShape(*obj->shape, actor->getGlobalPose(), obj->color);
 				continue;
 			}
 		}
-		renderShape(*obj->shape, objTransform ? *objTransform : physx::PxTransform(PxIdentity), obj->color);
+		if (obj->color.w > 0.01f) renderShape(*obj->shape, objTransform ? *objTransform : physx::PxTransform(PxIdentity), obj->color);
 	}
 
 	//PxScene* scene;

@@ -12,6 +12,7 @@ public:
 
 	float getMass() { return mass; };
 	Vector3D getVel() { return vel; };
+	RenderItem* getRendeItem() { return renderItem; };
 	bool isActive() { return active; };
 
 	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);

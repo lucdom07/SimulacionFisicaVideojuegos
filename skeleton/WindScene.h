@@ -35,7 +35,7 @@ public:
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
         partSys.push_back(new ParticleSystem(config));
-        WindGenerator* wind = new WindGenerator(Vector3D(100.f, 0.f, 0.f), 7.f);
+        WindGenerator* wind = new WindGenerator(Vector3D(10.f, 10.f, 10.f), Vector3D(0.f, 20.f, 0.f), Vector3D(1000.f, 0.f, 0.f), 7.f);
         partSys[0]->addForce(wind);
         forces.push_back(wind);
     }
