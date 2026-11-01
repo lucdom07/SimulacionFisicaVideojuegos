@@ -41,10 +41,14 @@ void ParticleSystem::addForce(ForceGenerator* f) {
 	}
 }
 
+void ParticleSystem::setParticleGenState(ParticleGenerator* g, bool active) {
+	g->setActive(active);
+}
+
 void ParticleSystem::generateParticles(double dt) {
 	std::vector<ParticleConfig> newParticles;
 	for (ParticleGenerator* g : partGens) {
-		g->update(dt, newParticles);
+		if (g->isActive()) g->update(dt, newParticles);
 	}
 	for (ParticleConfig& config : newParticles) {
 		activateParticle(config);
