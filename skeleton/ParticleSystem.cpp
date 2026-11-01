@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include "ForceRegistry.h"
 
-ParticleSystem::ParticleSystem(GeneratorConfig& config) : generator(new ParticleGenerator(config)), fReg(new ForceRegistry())
+ParticleSystem::ParticleSystem(GeneratorConfig& config) : fReg(new ForceRegistry())
 {
 	for (int i = 0; i < N_PARTS; i++) {
 		particles.push_back(new Particle());
@@ -12,30 +12,42 @@ ParticleSystem::ParticleSystem(GeneratorConfig& config) : generator(new Particle
 }
 
 ParticleSystem::~ParticleSystem() {
-	delete generator;
+	for (ParticleGenerator* g : partGens) {
+		delete g;
+	}
+	partGens.clear();
 	for (Particle* p : particles) {
 		delete p;
 	}
 	particles.clear();
+	delete fReg;
 }
 
 void ParticleSystem::update(double dt) {
-	std::vector<ParticleConfig> newParticles;
-	generator->update(dt, newParticles);
-	for (ParticleConfig& config : newParticles) {
-		activateParticle(config);
-	}
-
+	generateParticles(dt);
 	fReg->applyForce(dt);
-
 	for (Particle* p : particles) {
 		if (p->isActive()) p->update(dt);
 	}
 }
 
+void ParticleSystem::addParticleGen(ParticleGenerator* g) {
+	partGens.push_back(g);
+}
+
 void ParticleSystem::addForce(ForceGenerator* f) {
 	for (Particle* p : particles) {
 		fReg->registerPair(p, f);
+	}
+}
+
+void ParticleSystem::generateParticles(double dt) {
+	std::vector<ParticleConfig> newParticles;
+	for (ParticleGenerator* g : partGens) {
+		g->update(dt, newParticles);
+	}
+	for (ParticleConfig& config : newParticles) {
+		activateParticle(config);
 	}
 }
 
