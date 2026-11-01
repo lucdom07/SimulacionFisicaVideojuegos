@@ -73,10 +73,10 @@ ParticleConfig ParticleGenerator::gaussianAttribs() {
 	float g = colorGDistrib(gen);
 	if (g < 0) g = 0.01f;
 	std::normal_distribution<float> colorBDistrib(gaussian.meanColorB, gaussian.stddevColorB);
-	std::uniform_real_distribution<> posDistrib(-emitRadius, emitRadius);
-	Vector3D pPos(emitTrans.p.x + posDistrib(gen), emitTrans.p.y, emitTrans.p.z + posDistrib(gen));
 	float b = colorBDistrib(gen);
 	if (b < 0) b = 0.01f;
+	std::normal_distribution<float> posDistrib(0, emitRadius);
+	Vector3D pPos(emitTrans.p.x + posDistrib(gen), emitTrans.p.y, emitTrans.p.z + posDistrib(gen));
 
 	return ParticleConfig{ pPos, partMass, dir.normalize() * velDistrib(gen), life, size,
 		Vector3D(r, g, b) };
