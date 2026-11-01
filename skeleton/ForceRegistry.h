@@ -14,7 +14,9 @@ public:
 	~ForceRegistry() {};
 	void registerPair(Particle* p, ForceGenerator* f);
 	void applyForce(double t);
+	void setForceState(ForceGenerator* f, bool active);
 private:
 	std::unordered_map<Particle*, std::vector<ForceGenerator*>> registry;
+	std::unordered_map<ForceGenerator*, bool> activeForces;
 };
 
