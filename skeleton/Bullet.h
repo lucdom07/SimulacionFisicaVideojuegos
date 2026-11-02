@@ -8,7 +8,7 @@ public:
 	~Bullet() {};
 	void integrateSemiEuler(double t) override;
 protected:
+	const float simVelMod = 0.7f;
 	// modificador para calcular la velocidad simulada
-	const float simVelMod = 0.01f;
 	Vector3D simGrav;
 };

@@ -6,6 +6,7 @@ public:
 	float x, y, z;
 	Vector3D() : x(0), y(0), z(0) {}
 	Vector3D(float vx, float vy, float vz) : x(vx), y(vy), z(vz) {}
+	Vector3D(physx::PxVec3 v) : x(v.x), y(v.y), z(v.z) {}
 
 	float magnitude() const {
 		return sqrt(x*x + y*y + z*z);

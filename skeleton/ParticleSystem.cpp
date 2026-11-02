@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include "ForceRegistry.h"
 
-ParticleSystem::ParticleSystem(GeneratorConfig& config) : fReg(new ForceRegistry())
+ParticleSystem::ParticleSystem() : fReg(new ForceRegistry())
 {
 	for (int i = 0; i < N_PARTS; i++) {
 		particles.push_back(new Particle());

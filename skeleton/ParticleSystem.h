@@ -9,7 +9,7 @@ struct GeneratorConfig;
 class ParticleSystem
 {
 public:
-	ParticleSystem(GeneratorConfig& config);
+	ParticleSystem();
 	~ParticleSystem();
 
 	void update(double dt);
@@ -21,7 +21,7 @@ private:
 	void generateParticles(double dt);
 	void activateParticle(ParticleConfig config);
 
-	const int N_PARTS = 500;
+	const int N_PARTS = 700;
 	std::vector<Particle*> particles;
 	using particle_it = std::vector<Particle*>::iterator;
 	particle_it firstInactive;

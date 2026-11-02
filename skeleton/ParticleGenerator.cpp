@@ -3,7 +3,7 @@
 #include "ParticleGenerator.h"
 
 ParticleGenerator::ParticleGenerator(GeneratorConfig& config) : 
-	distribType(config.distribType), uniform(config.uniform), gaussian(config.gaussian), partMass(config.partMass),
+	active(true), distribType(config.distribType), uniform(config.uniform), gaussian(config.gaussian), partMass(config.partMass),
 	timer(0), genTime(config.genTime), meanParts(config.meanParts), varParts(config.varParts), 
 	emitRadius(config.emitRadius), emitTrans(config.emitTrans)
 {
