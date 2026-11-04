@@ -17,12 +17,12 @@ Particle::~Particle() {
 void Particle::integrateEuler(double t) {
 	pose.p = pose.p + physx::PxVec3(vel) * t;
 	vel = vel + acc * t;
-	vel = vel * pow(damping, t); // para que el damping dependa del tiempo
+	vel = vel * pow(damping, t); 
 }
 
 void Particle::integrateSemiEuler(double t) {
 	vel = vel + acc * t;
-	vel = vel * pow(damping, t); // para que el damping dependa del tiempo
+	vel = vel * pow(damping, t); 
 	pose.p = pose.p + physx::PxVec3(vel) * t;
 }
 

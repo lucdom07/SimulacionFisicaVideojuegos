@@ -11,9 +11,9 @@ Bullet::Bullet(Vector3D pos, Vector3D rvel, float rMass, float rGravity) :
 };
 
 void Bullet::integrateSemiEuler(double t) {
-	vel = vel + simGrav * invMass * t;
+	vel = vel + simGrav * t;
 	vel = vel * pow(damping, t);
-	pose.p = pose.p + physx::PxVec3(vel * t + simGrav * 0.5f * t * t);
+	pose.p = pose.p + physx::PxVec3(vel * t + simGrav * 0.5f * pow(t, 2));
 }
 
 void Bullet::changeGravity(bool increase) {
