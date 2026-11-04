@@ -17,8 +17,6 @@ public:
 	void addForce(ForceGenerator* f);
 	void setParticleGenState(ParticleGenerator* g, bool active);
 	void setForceGenState(ForceGenerator* f, bool active);
-	void addParticleGen(ParticleGenerator* g);
-	void setParticleGenState(ParticleGenerator* g, bool active);
 private:
 	void generateParticles(double dt);
 	void activateParticle(ParticleConfig config);

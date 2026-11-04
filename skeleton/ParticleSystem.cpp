@@ -50,10 +50,6 @@ void ParticleSystem::setForceGenState(ForceGenerator* f, bool active) {
 	fReg->setForceState(f, active);
 }
 
-void ParticleSystem::addParticleGen(ParticleGenerator* g) {
-	partGens.push_back(g);
-}
-
 void ParticleSystem::generateParticles(double dt) {
 	std::vector<ParticleConfig> newParticles;
 	for (ParticleGenerator* g : partGens) {

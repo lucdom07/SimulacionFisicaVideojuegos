@@ -47,20 +47,24 @@ public:
     }
 
     void update(double dt) override {
-        partSys->update(dt);
+        for (ParticleSystem* s : partSys) {
+            s->update(dt);
+        }
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
     }
 
     void cleanup() override {
-        delete partSys;
+        for (ParticleSystem* s : partSys) {
+            delete s;
+        }
         for (ForceGenerator* f : forces) {
             delete f;
         }
     }
 private:
-    ParticleSystem* partSys;
+    std::vector<ParticleSystem*> partSys;
     std::vector<ForceGenerator*> forces;
 };
 
