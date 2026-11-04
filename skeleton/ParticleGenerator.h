@@ -7,6 +7,9 @@ public:
 	ParticleGenerator(GeneratorConfig& config);
 	~ParticleGenerator() {};
 
+	bool isActive() { return active; };
+	void setActive(bool state) { active = state; };
+
 	void update(double t, std::vector<ParticleConfig>& configs);
 protected:
 	void generateNewPartConfigs(std::vector<ParticleConfig>& configs);
@@ -16,6 +19,8 @@ protected:
 	Distribution distribType;
 	UniformConfig uniform;
 	GaussianConfig gaussian;
+
+	bool active;
 
 	float partMass;
 	float timer;

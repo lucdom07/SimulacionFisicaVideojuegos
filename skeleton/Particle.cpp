@@ -38,8 +38,9 @@ void Particle::acumulateForce(Vector3D F) {
 }
 
 void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size) {
+
 	pose = physx::PxTransform(physx::PxVec3(pos));
-	acc = Vector3D(0, 0, 0);
+	acc = Vector3D();
 	lastPose = pos;
 	vel = pvel; 
 	initSize = size;
@@ -58,7 +59,7 @@ void Particle::integrateSemiEuler(double t) {
 	acc = f * invMass;
 	vel = vel + acc * t;
 	vel = vel * pow(damping, t);
-	pose.p = pose.p + physx::PxVec3(vel * t + acc * 0.5f * t * t);
+	pose.p = pose.p + physx::PxVec3(vel) * t;
 }
 
 void Particle::changeMass(bool increase) {
