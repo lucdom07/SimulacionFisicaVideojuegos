@@ -22,8 +22,7 @@
 // Para las escenas del curso, se incluyen los headers de las prácticas y la escena vacía
 #include "SceneManager.h"
 #include "EmptyScene.h"
-#include "P0_Scene.h"
-#include "P1_Scene.h"
+#include "GravityScene.h"
 #include "WindScene.h"
 #include "WhirlScene.h"
 
@@ -103,8 +102,7 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
-	SceneManager::instance().registerScene<P0_Scene>("P0_Scene");
-	SceneManager::instance().registerScene<P1_Scene>("P1_Scene");
+	SceneManager::instance().registerScene<GravityScene>("GravityScene");
 	SceneManager::instance().registerScene<WindScene>("WindScene");
 	SceneManager::instance().registerScene<WhirlScene>("WhirlScene");
 

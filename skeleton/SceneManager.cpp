@@ -56,7 +56,7 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
         return; // Consumimos el evento para que no interfiera con la escena
     }
     else if (key == '1') {
-        changeScene("P1_Scene");
+        changeScene("GravityScene");
         return; // Consumimos el evento para que no interfiera con la escena
     }
     else if (key == '2') {

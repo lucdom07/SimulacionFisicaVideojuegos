@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include "ParticleSystem.h"
-#include "ParticleGenConfigs.h"
+#include "ParticleGenerator.h"
 #include "WindGenerator.h"
 class WindScene :
     public Scene
@@ -27,16 +27,25 @@ public:
                 0.1f, 0.1f // color azul
             },
             Vector3D(0.f,1.f,0.f),
-            1000.f, // masa
-            1.f, // tiempo de generación
-            1, // media partículas
-            1, // varianza partículas
+            50.f, // masa
+            0.3f, // tiempo de generación
+            20, // media partículas
+            3, // varianza partículas
             2.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
-        partSys.push_back(new ParticleSystem(config));
-        WindGenerator* wind = new WindGenerator(Vector3D(10.f, 10.f, 10.f), Vector3D(0.f, 20.f, 0.f), Vector3D(1000.f, 0.f, 0.f), 7.f);
+        partSys.push_back(new ParticleSystem());        
+        partSys.push_back(new ParticleSystem());
+        partSys[0]->addParticleGen(new ParticleGenerator(config));
+
+        config.partMass = 0.3f;
+        config.emitTrans.p.z = config.emitTrans.p.x = 10.f;
+        partSys[1]->addParticleGen(new ParticleGenerator(config));
+
+        // CREACIÓN DE VIENTO
+        WindGenerator* wind = new WindGenerator(Vector3D(100.f, 100.f, 100.f), Vector3D(-20.f, 0.f, -20.f), Vector3D(50.f, 0.f, 0.f), 10.f);
         partSys[0]->addForce(wind);
+        partSys[1]->addForce(wind);
         forces.push_back(wind);
     }
 

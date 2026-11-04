@@ -4,7 +4,7 @@
 #include "ForceRegistry.h"
 #include <iostream>
 
-ParticleSystem::ParticleSystem()
+ParticleSystem::ParticleSystem() : fReg(new ForceRegistry())
 {
 	for (int i = 0; i < N_PARTS; i++) {
 		particles.push_back(new Particle());
