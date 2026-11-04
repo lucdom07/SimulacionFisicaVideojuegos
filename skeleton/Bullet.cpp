@@ -1,19 +1,21 @@
 #include <iostream>
 #include "Bullet.h"
 
-Bullet::Bullet(Vector3D pos, Vector3D simvel, float rvel, Vector3D a, float d, float rMass, float rGravity) :
-	Particle(pos, simvel, a, d, rMass) {
-	mass = rMass * std::powf((rvel/simvel.magnitude()), 2.f);
-	float simGrav = rGravity * std::powf(simvel.magnitude() / rvel, 2.f);
-	gravity = Vector3D(0, -simGrav, 0);
+// A la constructora base Particle le pasamos directamente las magnitudes escaladas de masa y velocidad para la simulación
+Bullet::Bullet(Vector3D pos, Vector3D rvel, float rMass, float rGravity) :
+	Particle(pos, Vector3D(), Vector3D(), 0.99f, 10.f) {
+	vel = rvel * simVelMod;
+	mass = rMass * std::powf((rvel.magnitude() / (rvel * simVelMod).magnitude()), 2.f);
+	invMass = 1 / mass;
+	simGrav = Vector3D(0, -(rGravity * std::powf((rvel * simVelMod).magnitude() / rvel.magnitude(), 2.f)), 0);
 };
 
 void Bullet::integrateSemiEuler(double t) {
-	vel = vel + gravity * mass * t;
+	vel = vel + simGrav * invMass * t;
 	vel = vel * pow(damping, t);
-	pose.p = pose.p + physx::PxVec3(vel * t + gravity * mass * 0.5f * t * t);
+	pose.p = pose.p + physx::PxVec3(vel * t + simGrav * 0.5f * t * t);
 }
 
 void Bullet::changeGravity(bool increase) {
-	(increase) ? gravity -= Vector3D(0, gravMod, 0) : gravity += Vector3D(0, gravMod, 0);
+	(increase) ? simGrav.y -= gravMod : simGrav.y += gravMod;
 }

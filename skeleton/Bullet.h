@@ -4,11 +4,15 @@
 class Bullet : public Particle
 {
 public:
-	Bullet(Vector3D pos, Vector3D simvel, float rvel, Vector3D a, float d, float rMass, float rGravity);
+	Bullet(Vector3D pos, Vector3D rvel, float rMass, float rGravity);
 	~Bullet() {};
 	void integrateSemiEuler(double t) override;
 	void changeGravity(bool increase);
 protected:
-	const float gravMod = 0.1f; // indica cuánto cambia la gravedad por cada pulsación
-	Vector3D gravity;
+	// modificador para ajustar la velocidad simulada
+	const float simVelMod = 0.1f;
+	// indica cuánto cambia la gravedad por cada pulsación
+	const float gravMod = 0.1f;
+	// modificador para calcular la gravedad simulada
+	Vector3D simGrav;
 };

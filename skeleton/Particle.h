@@ -16,9 +16,11 @@ public:
 protected:
 	Vector3D vel;
 	Vector3D acc;
-	const float massMod = 0.1f; // indica cuánto cambia la masa por cada pulsación
+	// indica cuánto cambia la masa por cada pulsación
+	const float massMod = 0.1f; 
 	float damping;
 	float mass;
+	float invMass;
 
 	physx::PxTransform pose;
 	Vector3D lastPose;
