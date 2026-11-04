@@ -19,7 +19,6 @@ public:
 	virtual void integrateSemiEuler(double t);
 	void integrateVerlet(double t);
 	void changeMass(bool increase);
-	void changeGravity(bool increase);
 	//suma el delta time al contador de tiempo de vida de la partícula. Devuelve true si ya ha superado su tiempo de vida y false en caso contrario
 	void countLifeTime(double t);
 	void decreaseOpacity(double t);
@@ -30,15 +29,12 @@ protected:
 
 	Vector3D vel;
 	Vector3D acc;
-	// modificador para la velocidad simulada
-	const float simVelMod = 0.01f;
+	float mass;
+	float invMass;
 	// indica cuánto cambia la masa por cada pulsación
 	const float massMod = 0.1f; 
-	// indica cuánto cambia la gravedad por cada pulsación
-	const float gravMod = 0.1f; 
 	const float damping = 0.99f;
 	float initSize;
-	float mass;
 	float lifeTime;
 	float lTimer;
 
