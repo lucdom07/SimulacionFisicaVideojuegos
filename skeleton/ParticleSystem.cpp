@@ -2,7 +2,6 @@
 #include "ParticleGenerator.h"
 #include "Particle.h"
 #include "ForceRegistry.h"
-
 #include <iostream>
 
 ParticleSystem::ParticleSystem()

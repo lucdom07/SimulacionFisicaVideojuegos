@@ -20,8 +20,7 @@ private:
 	void generateParticles(double dt);
 	void activateParticle(ParticleConfig config);
 
-	const float PARTS_GRAVITY = 10.f;
-	const int N_PARTS = 700;
+	const int N_PARTS = 1000;
 	std::vector<Particle*> particles;
 	using particle_it = std::vector<Particle*>::iterator;
 	particle_it firstInactive;

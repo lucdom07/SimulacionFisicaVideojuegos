@@ -38,11 +38,11 @@ void Particle::acumulateForce(Vector3D F) {
 }
 
 void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size) {
-
 	pose = physx::PxTransform(physx::PxVec3(pos));
 	acc = Vector3D();
 	lastPose = pos;
 	vel = pvel; 
+	acc = Vector3D();
 	initSize = size;
 	lifeTime = life; 
 	lTimer = 0;
