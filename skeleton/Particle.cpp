@@ -55,7 +55,7 @@ void Particle::integrateEuler(double t) {
 }
 
 void Particle::integrateSemiEuler(double t) {
-	acc = gravity * invMass;
+	acc = gravity;
 	vel = vel + acc * t;
 	vel = vel * pow(damping, t);
 	pose.p = pose.p + physx::PxVec3(vel) * t;

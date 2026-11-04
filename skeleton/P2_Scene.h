@@ -18,8 +18,8 @@ public:
         GeneratorConfig config{
             UNIFORM, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
-                Vector3D(0.f, 1.f, 0.f), Vector3D(0.5f, 1.f, 0.5f), // dirección velocidad
-                15.f, 20.f, //magnitud velocidad
+                Vector3D(-0.5f, 1.f, -0.5f), Vector3D(0.5f, 1.f, 0.5f), // dirección velocidad
+                50.f, 80.f, //magnitud velocidad
                 2.f, 5.f, //vida
                 1.f, 2.f, //tamaño
                 0.1f, 1.f, // color rojo
@@ -43,7 +43,7 @@ public:
             },
             GaussianConfig{ // Configuración distribución gaussiana
                 Vector3D(0.f, 1.f, 0.f), Vector3D(0.05f, 0.0001f, 0.05f), // dirección velocidad
-                15.f, 5.f, //magnitud velocidad
+                30.f, 1.f, //magnitud velocidad
                 2.f, 0.5f, //vida
                 1.f, 0.5f, //tamaño
                 1.f, 0.1f, // color rojo
@@ -52,8 +52,8 @@ public:
             }, 
             Vector3D(0.f,1.f,0.f),
             10.f, // masa
-            0.2f, // tiempo de generación
-            30, // media partículas
+            0.1f, // tiempo de generación
+            10, // media partículas
             5, // varianza partículas
             2.f, //radio de emisión
             physx::PxTransform(Vector3(40,0,0)) //transform del emisor
@@ -66,8 +66,8 @@ public:
             },
             GaussianConfig{ // Configuración distribución gaussiana
                 Vector3D(0.f, 1.f, 0.f), Vector3D(0.01f, 0.0001f, 0.01f), // dirección velocidad
-                1.f, 0.5f, //magnitud velocidad
-                4.f, 0.5f, //vida
+                15.f, 0.5f, //magnitud velocidad
+                1.7f, 0.1f, //vida
                 1.f, 0.5f, //tamaño
                 0.5f, 0.1f, // color rojo
                 0.3f, 0.1f, //color verde
@@ -75,8 +75,8 @@ public:
             },
             Vector3D(0.f,1.f,0.f),
             50.f, // masa
-            0.2f, // tiempo de generación
-            50, // media partículas
+            0.3f, // tiempo de generación
+            30, // media partículas
             3, // varianza partículas
             20.f, //radio de emisión
             physx::PxTransform(Vector3(-60,0,0)) //transform del emisor
