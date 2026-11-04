@@ -3,7 +3,7 @@
 #include "RenderUtils.hpp"
 
 Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vector3D(0,0,0)))), lastPose(Vector3D(0, 0, 0)), 
-	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0), initSize(0.f) {
+	vel(Vector3D(0, 0, 0)), acc(Vector3D(0, 0, 0)), mass(0.f), invMass(0.f), gravity(Vector3D(0, 0, 0)), lifeTime(0), lTimer(0), initSize(0.f) {
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(0.1f));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(0.f, 0.f, 0.f, 0.f));
 };
@@ -29,16 +29,17 @@ void Particle::update(double dt) {
 	decreaseSize(dt);
 }
 
-void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) {
+void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size) {
 	pose = physx::PxTransform(physx::PxVec3(pos));
 	lastPose = pos;
 	vel = pvel; 
-	acc = a;
+	acc = Vector3D();
 	initSize = size;
 	lifeTime = life; 
 	lTimer = 0;
 
 	mass = m;
+	invMass = 1 / m;
 	gravity = Vector3D(0, -g, 0);
 
 	if (renderItem) renderItem->release();
@@ -54,9 +55,10 @@ void Particle::integrateEuler(double t) {
 }
 
 void Particle::integrateSemiEuler(double t) {
-	vel = vel + gravity * mass * t;
+	acc = gravity * invMass;
+	vel = vel + acc * t;
 	vel = vel * pow(damping, t);
-	pose.p = pose.p + physx::PxVec3(vel * t + gravity * mass * 0.5f * t * t);
+	pose.p = pose.p + physx::PxVec3(vel) * t;
 }
 
 void Particle::integrateVerlet(double t) {

@@ -14,7 +14,7 @@ public:
 
 	void update(double dt);
 
-	void configParticle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size);
+	void configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float g, float life, float size);
 	void integrateEuler(double t);
 	virtual void integrateSemiEuler(double t);
 	void integrateVerlet(double t);
