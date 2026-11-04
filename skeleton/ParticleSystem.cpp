@@ -2,6 +2,7 @@
 #include "ParticleGenerator.h"
 #include "Particle.h"
 #include "ForceRegistry.h"
+#include <iostream>
 
 ParticleSystem::ParticleSystem() : fReg(new ForceRegistry())
 {
@@ -47,6 +48,10 @@ void ParticleSystem::setParticleGenState(ParticleGenerator* g, bool active) {
 
 void ParticleSystem::setForceGenState(ForceGenerator* f, bool active) {
 	fReg->setForceState(f, active);
+}
+
+void ParticleSystem::addParticleGen(ParticleGenerator* g) {
+	partGens.push_back(g);
 }
 
 void ParticleSystem::generateParticles(double dt) {

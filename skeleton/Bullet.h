@@ -7,8 +7,11 @@ public:
 	Bullet(Vector3D pos, Vector3D rvel, float rMass, float rGravity);
 	~Bullet() {};
 	void integrateSemiEuler(double t) override;
+	void changeGravity(bool increase);
 protected:
-	const float simVelMod = 0.7f;
-	// modificador para calcular la velocidad simulada
+	// modificador para ajustar la velocidad simulada
+	const float simVelMod = 0.1f;
+	// indica cuánto cambia la gravedad por cada pulsación
+	const float gravMod = 0.1f;
 	Vector3D simGrav;
 };

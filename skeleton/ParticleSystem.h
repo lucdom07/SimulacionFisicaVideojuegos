@@ -17,11 +17,13 @@ public:
 	void addForce(ForceGenerator* f);
 	void setParticleGenState(ParticleGenerator* g, bool active);
 	void setForceGenState(ForceGenerator* f, bool active);
+	void addParticleGen(ParticleGenerator* g);
+	void setParticleGenState(ParticleGenerator* g, bool active);
 private:
 	void generateParticles(double dt);
 	void activateParticle(ParticleConfig config);
 
-	const int N_PARTS = 700;
+	const int N_PARTS = 1000;
 	std::vector<Particle*> particles;
 	using particle_it = std::vector<Particle*>::iterator;
 	particle_it firstInactive;
