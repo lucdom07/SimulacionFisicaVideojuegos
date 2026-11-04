@@ -7,7 +7,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size, bool isInmortal = false);
+	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
 	virtual ~Particle();
 
 	float getMass() { return mass; };
@@ -32,8 +32,6 @@ protected:
 
 	//indica si la partícula está activa
 	bool active;
-	// indica si la partícula tiene tiempo de vida
-	bool inmortal;
 
 	Vector3D vel;
 	Vector3D acc;
