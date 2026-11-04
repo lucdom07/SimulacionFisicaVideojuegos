@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 #include "ParticleSystem.h"
-#include "ParticleGenConfigs.h"
+#include "ParticleGenerator.h"
 
 class P2_Scene :
     public Scene
@@ -13,6 +13,8 @@ public:
     explicit P2_Scene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
+        partSys = new ParticleSystem();
+        // CREACIÓN GENERADORES PARTÍCULAS
         GeneratorConfig config{
             UNIFORM, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
@@ -33,7 +35,8 @@ public:
             10.f, //radio de emisión
             physx::PxTransform(Vector3(0,0,0)) //transform del emisor
         };
-        partSys.push_back(new ParticleSystem(config));
+        ParticleGenerator* partGen = new ParticleGenerator(config);
+        partSys->addParticleGen(partGen);
         config = {
             GAUSSIAN, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
@@ -55,7 +58,8 @@ public:
             2.f, //radio de emisión
             physx::PxTransform(Vector3(40,0,0)) //transform del emisor
         };
-        partSys.push_back(new ParticleSystem(config));
+        partGen = new ParticleGenerator(config);
+        partSys->addParticleGen(partGen);
         config = {
             GAUSSIAN, //Tipo de distribución
             UniformConfig{ // Configuración distribución uniforme
@@ -77,24 +81,21 @@ public:
             20.f, //radio de emisión
             physx::PxTransform(Vector3(-60,0,0)) //transform del emisor
         };
-        partSys.push_back(new ParticleSystem(config));
+        partGen = new ParticleGenerator(config);
+        partSys->addParticleGen(partGen);
     }
 
     void update(double dt) override {
-        for (ParticleSystem* s : partSys) {
-            s->update(dt);
-        }
+        partSys->update(dt);
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
     }
 
     void cleanup() override {
-        for (ParticleSystem* s : partSys) {
-            delete s;
-        }
+        delete partSys;
     }
 private:
-    std::vector<ParticleSystem*> partSys;
+    ParticleSystem* partSys;
 };
 

@@ -7,17 +7,20 @@ struct GeneratorConfig;
 class ParticleSystem
 {
 public:
-	ParticleSystem(GeneratorConfig& config);
+	ParticleSystem();
 	~ParticleSystem();
 
 	void update(double dt);
+	void addParticleGen(ParticleGenerator* g);
+	void setParticleGenState(ParticleGenerator* g, bool active);
 private:
+	void generateParticles(double dt);
 	void activateParticle(ParticleConfig config);
 
-	const int N_PARTS = 200;
 	const float PARTS_GRAVITY = 10.f;
+	const int N_PARTS = 700;
 	std::vector<Particle*> particles;
 	using particle_it = std::vector<Particle*>::iterator;
 	particle_it firstInactive;
-	ParticleGenerator* generator;
+	std::vector<ParticleGenerator*> partGens;
 };
