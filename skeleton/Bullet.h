@@ -6,6 +6,8 @@ class Bullet : public Particle
 public:
 	Bullet(Vector3D pos, Vector3D rvel, float rMass, float rGravity);
 	~Bullet() {};
+	void integrateSemiEuler(double t) override;
+	void changeGravity(bool increase);
 protected:
 	// modificador para ajustar la velocidad simulada
 	const float simVelMod = 0.1f;

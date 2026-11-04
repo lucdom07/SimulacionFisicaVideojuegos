@@ -9,10 +9,11 @@ Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vect
 };
 
 Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D a, Vector3D color, float m, float g, float life, float size) :
-	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), mass(m), invMass(1/m),
+	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(a), mass(m), invMass(1 / m),
 	lifeTime(life), lTimer(0), initSize(size) {
 	physx::PxShape* sphereShape = CreateShape(physx::PxSphereGeometry(size));
 	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
+};
 
 Particle::~Particle() {
 	if (renderItem) {
