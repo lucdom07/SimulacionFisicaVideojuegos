@@ -22,10 +22,7 @@
 // Para las escenas del curso, se incluyen los headers de las prácticas y la escena vacía
 #include "SceneManager.h"
 #include "EmptyScene.h"
-#include "Level_1.h"
-#include "Level_2.h"
-#include "Level_3.h"
-
+#include "Level.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -102,9 +99,7 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
-	SceneManager::instance().registerScene<Level_1>("Level_1");
-	SceneManager::instance().registerScene<Level_2>("Level_2");
-	SceneManager::instance().registerScene<Level_3>("Level_3");
+	SceneManager::instance().registerScene<Level>("Level");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");

@@ -12,9 +12,10 @@ public:
 	};
 	ForceRegistry() {};
 	~ForceRegistry() {};
+	bool getForceState(ForceGenerator* f) { return activeForces[f]; };
+	void setForceState(ForceGenerator* f, bool active) { activeForces[f] = active; };
 	void registerPair(Particle* p, ForceGenerator* f);
 	void applyForce(double t);
-	void setForceState(ForceGenerator* f, bool active);
 private:
 	std::unordered_map<Particle*, std::vector<ForceGenerator*>> registry;
 	std::unordered_map<ForceGenerator*, bool> activeForces;

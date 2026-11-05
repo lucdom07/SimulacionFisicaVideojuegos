@@ -46,6 +46,10 @@ void ParticleSystem::setParticleGenState(ParticleGenerator* g, bool active) {
 	g->setActive(active);
 }
 
+bool ParticleSystem::getForceGenState(ForceGenerator* f) {
+	return fReg->getForceState(f);
+}
+
 void ParticleSystem::setForceGenState(ForceGenerator* f, bool active) {
 	fReg->setForceState(f, active);
 }

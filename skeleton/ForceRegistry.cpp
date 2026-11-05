@@ -21,7 +21,3 @@ void ForceRegistry::applyForce(double t) {
 		}
 	}
 }
-
-void ForceRegistry::setForceState(ForceGenerator* f, bool active) {
-	activeForces[f] = active;
-}
