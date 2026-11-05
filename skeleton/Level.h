@@ -117,9 +117,9 @@ public:
         partsReg->setForceState(partsWind, false);
         forces.push_back(partsWind);
 
-        whirl = new WhirlGenerator(Vector3D(50.f, 50.f, 50.f), Vector3D(0.f, 0.f, 0.f), 13.f);
-        partSys[0]->addForce(whirl);
-        partSys[0]->setForceGenState(whirl, false);
+        whirl = new WhirlGenerator(Vector3D(50.f, 50.f, 50.f), Vector3D(-40.f, 0.f, 0.f), 1.f);
+        partSys[2]->addForce(whirl);
+        partSys[2]->setForceGenState(whirl, false);
         forces.push_back(whirl);
 
         exp = new ExplosionGenerator(Vector3D(40.f, 40.f, 40.f), Vector3D(-20.f, 0.f, -20.f), 40.f, 40.f, 15.f);
@@ -149,7 +149,7 @@ public:
             partsReg->setForceState(partsWind, true);
         }
         else if (key == 'x') {
-            partSys[0]->setForceGenState(whirl, !partSys[0]->getForceGenState(whirl));
+            partSys[2]->setForceGenState(whirl, !partSys[2]->getForceGenState(whirl));
         }
         else if (key == 'c') {
             partSys[0]->setForceGenState(exp, !partSys[0]->getForceGenState(exp));
