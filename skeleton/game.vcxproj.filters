@@ -21,6 +21,8 @@
     <ClCompile Include="WindGenerator.cpp" />
     <ClCompile Include="WhirlGenerator.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
+    <ClCompile Include="SpringGenerator.cpp" />
+    <ClCompile Include="AnchoredSpring.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -46,10 +48,10 @@
     <ClInclude Include="ParticleGenConfigs.h" />
     <ClInclude Include="WindGenerator.h" />
     <ClInclude Include="WhirlGenerator.h" />
-    <ClInclude Include="Level_1.h" />
-    <ClInclude Include="Level_2.h" />
-    <ClInclude Include="Level_3.h" />
     <ClInclude Include="ExplosionGenerator.h" />
+    <ClInclude Include="Scene1.h" />
+    <ClInclude Include="SpringGenerator.h" />
+    <ClInclude Include="AnchoredSpring.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -52,7 +52,7 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
         return; // Consumimos el evento para que no interfiera con la escena
     }
     else if (key == '1') {
-        changeScene("Level");
+        changeScene("Scene1");
         return; // Consumimos el evento para que no interfiera con la escena
     }
 

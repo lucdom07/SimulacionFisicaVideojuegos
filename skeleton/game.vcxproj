@@ -262,6 +262,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnchoredSpring.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
@@ -276,10 +277,12 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SpringGenerator.cpp" />
     <ClCompile Include="WhirlGenerator.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnchoredSpring.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
@@ -288,7 +291,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="ForceRegistry.h" />
     <ClInclude Include="GravityGenerator.h" />
-    <ClInclude Include="Level.h" />
+    <ClInclude Include="Scene1.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenConfigs.h" />
     <ClInclude Include="ParticleGenerator.h" />
@@ -298,6 +301,7 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SpringGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="WhirlGenerator.h" />
     <ClInclude Include="WindGenerator.h" />
