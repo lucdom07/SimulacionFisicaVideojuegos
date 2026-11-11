@@ -264,6 +264,7 @@
   <ItemGroup>
     <ClCompile Include="AnchoredSpring.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BuoyancyGenerator.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ElasticBand.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
@@ -285,6 +286,7 @@
   <ItemGroup>
     <ClInclude Include="AnchoredSpring.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BuoyancyGenerator.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ElasticBand.h" />
@@ -303,6 +305,7 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene2.h" />
+    <ClInclude Include="Scene3.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpringGenerator.h" />
     <ClInclude Include="Vector3D.h" />

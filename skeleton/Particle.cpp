@@ -11,9 +11,16 @@ Particle::Particle() : active(false), pose(physx::PxTransform(physx::PxVec3(Vect
 Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size, physx::PxGeometryType::Enum type) :
 	active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(Vector3D(0, 0, 0)), mass(m), invMass(1/m), f(Vector3D()),
 	lifeTime(life), lTimer(0), initSize(size) {
-	physx::PxShape* sphereShape = (type == physx::PxGeometryType::eSPHERE) ? 
+	physx::PxShape* shape = (type == physx::PxGeometryType::eSPHERE) ? 
 		CreateShape(physx::PxSphereGeometry(size)) : CreateShape(physx::PxBoxGeometry(size, size, size));
-	renderItem = new RenderItem(sphereShape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
+	renderItem = new RenderItem(shape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
+};
+
+Particle::Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float width, float height, float depth) :
+active(true), pose(physx::PxTransform(physx::PxVec3(pos))), lastPose(pos), vel(pvel), acc(Vector3D(0, 0, 0)), mass(m), invMass(1 / m), f(Vector3D()),
+lifeTime(life), lTimer(0), initSize(0) {
+	physx::PxShape* shape = CreateShape(physx::PxBoxGeometry(width, height, depth));
+	renderItem = new RenderItem(shape, &pose, Vector4(color.x, color.y, color.z, 1.0f));
 };
 
 Particle::~Particle() {
