@@ -33,7 +33,7 @@ public:
         fReg->registerPair(p, spring);
         forces.push_back(spring);
 
-        wind = new WindGenerator(Vector3D(100., 200., 100.), Vector3D(1., anchor.y - restLength * 10, 0.), Vector3D(20.f, 0.f, -20.f), 10.f);
+        wind = new WindGenerator(Vector3D(100., 200., 100.), Vector3D(0., anchor.y - restLength * 10, 0.), Vector3D(20.f, 0.f, -20.f), 10.f);
         fReg->registerPair(p, wind);
         fReg->setForceState(wind, false);
         forces.push_back(wind);

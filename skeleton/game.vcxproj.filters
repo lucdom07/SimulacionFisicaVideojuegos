@@ -23,6 +23,7 @@
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="SpringGenerator.cpp" />
     <ClCompile Include="AnchoredSpring.cpp" />
+    <ClCompile Include="ElasticBand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -52,6 +53,8 @@
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="SpringGenerator.h" />
     <ClInclude Include="AnchoredSpring.h" />
+    <ClInclude Include="Scene2.h" />
+    <ClInclude Include="ElasticBand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

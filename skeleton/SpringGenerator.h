@@ -7,7 +7,7 @@ class SpringGenerator :
 public:
     SpringGenerator(double k, double rLength, Particle* other);
     virtual ~SpringGenerator() {};
-    void updateForce(Particle* particle, float dt) override;
+    virtual void updateForce(Particle* particle, float dt) override;
     inline double getK() { return mK; };
     inline void setK(double k) { mK = k; };
 protected:

@@ -265,6 +265,7 @@
     <ClCompile Include="AnchoredSpring.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="ElasticBand.cpp" />
     <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="ElasticBand.h" />
     <ClInclude Include="EmptyScene.h" />
     <ClInclude Include="ExplosionGenerator.h" />
     <ClInclude Include="ForceGenerator.h" />
@@ -300,6 +302,7 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene2.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpringGenerator.h" />
     <ClInclude Include="Vector3D.h" />
