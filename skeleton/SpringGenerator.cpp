@@ -6,7 +6,7 @@ SpringGenerator::SpringGenerator(double k, double rLength, Particle* other) {
 	mOther = other;
 }
 
-void SpringGenerator::updateForce(Particle* particle) {
+void SpringGenerator::updateForce(Particle* particle, float dt) {
 	Vector3D relPos = mOther->getPos() - particle->getPos();
 	Vector3D force;
 

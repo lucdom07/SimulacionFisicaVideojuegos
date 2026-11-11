@@ -7,7 +7,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size);
+	Particle(Vector3D pos, Vector3D pvel, Vector3D color, float m, float life, float size, physx::PxGeometryType::Enum type = physx::PxGeometryType::eSPHERE);
 	virtual ~Particle();
 
 	float getMass() { return mass; };
