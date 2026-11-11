@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Particle.h"
 #include "BuoyancyGenerator.h"
+#include "GravityGenerator.h"
 #include "ForceRegistry.h"
 
 class Scene3 :
@@ -18,12 +19,15 @@ public:
         fReg = new ForceRegistry();
 
         // CREACIÓN PARTÍCULA
-        p = new Particle(Vector3D(0.f, -10.f, 0.f), Vector3D(), Vector3D(1.f, 0.f, 1.f), 10.f, -1, 10.f, 30.f, 10.f);
+        p = new Particle(Vector3D(0.f, -10.f, 0.f), Vector3D(), Vector3D(1.f, 0.f, 1.f), 1000.f, -1, 10.f, 30.f, 10.f);
 
         // CREACIÓN FUERZAS
-        BuoyancyGenerator* buoyancy = new BuoyancyGenerator(200, 100, 1);
+        BuoyancyGenerator* buoyancy = new BuoyancyGenerator(0.f, 3.f, 1000);
         fReg->registerPair(p, buoyancy);
         forces.push_back(buoyancy);
+        GravityGenerator* grav = new GravityGenerator(9.81f);
+        fReg->registerPair(p, grav);
+        forces.push_back(grav);
     }
 
     void update(double dt) override {

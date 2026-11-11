@@ -1,7 +1,7 @@
 #include "BuoyancyGenerator.h"
 
 BuoyancyGenerator::BuoyancyGenerator(float h, float V, float d) : mHeight(h), mVolume(V), mDensity(d) {
-	mLiquidPart = new Particle(Vector3D(), Vector3D(), Vector3D(0., 0.3, 1.), 0., -1., 100, 0.1, 100);
+	mLiquidPart = new Particle(Vector3D(), Vector3D(), Vector3D(0., h, 1.), 0., -1., 100, 0.1, 100);
 }
 
 BuoyancyGenerator::~BuoyancyGenerator() {
