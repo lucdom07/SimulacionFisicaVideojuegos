@@ -34,6 +34,7 @@ public:
 
     void update(double dt) override {
         fReg->applyForce(dt);
+        //p->integrateEuler(dt);
         p->integrateSemiEuler(dt);
     }
 

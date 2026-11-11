@@ -56,6 +56,13 @@ void Particle::configParticle(Vector3D pos, Vector3D pvel, Vector3D color, float
 	active = true;
 }
 
+void Particle::integrateEuler(double t) {
+	acc = f * invMass;
+	pose.p = pose.p + physx::PxVec3(vel) * t;
+	vel = vel + acc * t;
+	vel = vel * pow(damping, t);
+}
+
 void Particle::integrateSemiEuler(double t) {
 	acc = f * invMass;
 	vel = vel + acc * t;

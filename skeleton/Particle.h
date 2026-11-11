@@ -20,7 +20,10 @@ public:
 	void update(double dt);
 	void cleanAcumulator();
 	void acumulateForce(Vector3D F);
+
+	void integrateEuler(double t);
 	virtual void integrateSemiEuler(double t);
+
 	void changeMass(bool increase);
 protected:
 	//suma el delta time al contador de tiempo de vida de la partícula
