@@ -77,8 +77,8 @@ void Particle::integrateSemiEuler(double t) {
 	pose.p = pose.p + physx::PxVec3(vel) * t;
 }
 
-void Particle::changeMass(bool increase) {
-	(increase) ? mass += massMod : mass -= massMod;
+void Particle::changeMass(float m) {
+	mass += m;
 }
 
 void Particle::countLifeTime(double t) {

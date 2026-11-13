@@ -25,7 +25,7 @@ public:
 	void integrateEuler(double t);
 	virtual void integrateSemiEuler(double t);
 
-	void changeMass(bool increase);
+	void changeMass(float m);
 protected:
 	//suma el delta time al contador de tiempo de vida de la partícula
 	void countLifeTime(double t);
@@ -42,8 +42,6 @@ protected:
 
 	float mass;
 	float invMass;
-	// indica cuánto cambia la masa por cada pulsación
-	const float massMod = 0.1f; 
 	const float damping = 0.99f;
 	float initSize;
 	float lifeTime;

@@ -6,6 +6,10 @@ class BuoyancyGenerator :
 public:
     BuoyancyGenerator(float h, float V, float d);
     ~BuoyancyGenerator();
+
+    float getVolume() { return mVolume; };
+
+    void changeVolume(float v);
     void updateForce(Particle* particle, float dt) override;
 protected:
     float mHeight;

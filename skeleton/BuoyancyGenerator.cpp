@@ -8,6 +8,10 @@ BuoyancyGenerator::~BuoyancyGenerator() {
 	delete mLiquidPart;
 }
 
+void BuoyancyGenerator::changeVolume(float v) {
+	mVolume += v;
+}
+
 void BuoyancyGenerator::updateForce(Particle* particle, float dt) {
 	float h = particle->getPos().y;
 	float h0 = mLiquidPart->getPos().y;
